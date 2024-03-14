@@ -1,4 +1,4 @@
-package cse416.teamspurs.server.Representatives;
+package cse416.teamspurs.server.Representatives.Virgina;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -30,4 +30,6 @@ public class VirginaReps {
     private String race2;
 
     private String image;
+
+    //private String State;
 }

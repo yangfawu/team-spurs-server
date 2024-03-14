@@ -1,4 +1,4 @@
-package cse416.teamspurs.server.Representatives;
+package cse416.teamspurs.server.Representatives.Virgina;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ public class VirginaRepService {
 
     public List<VirginaReps> getAllVirginaReps()
     {
-        System.out.println(virginaRepRepository.findAll().toString());
+        //System.out.println(virginaRepRepository.findAll().toString());
         return virginaRepRepository.findAll();
     }
 

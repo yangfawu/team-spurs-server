@@ -2,6 +2,10 @@ package cse416.teamspurs.server.Representatives;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import cse416.teamspurs.server.Representatives.Virgina.VirginaRepService;
+import cse416.teamspurs.server.Representatives.Virgina.VirginaReps;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
