@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/district")
+@RequestMapping("/api/district")
 public class DistrictController {
     @Autowired
     private DistrictService service;

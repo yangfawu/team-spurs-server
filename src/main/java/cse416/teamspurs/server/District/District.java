@@ -35,5 +35,5 @@ public class District {
 
     private Integer mixed;
 
-    //private String State;
+    private String state;
 }

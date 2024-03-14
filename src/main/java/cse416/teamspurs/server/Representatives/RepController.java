@@ -3,26 +3,28 @@ package cse416.teamspurs.server.Representatives;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cse416.teamspurs.server.Representatives.Virgina.VirginaRepService;
-import cse416.teamspurs.server.Representatives.Virgina.VirginaReps;
+import jakarta.websocket.server.PathParam;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import java.util.List;
-//import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
-@RequestMapping("/api/v1/rep")
+@RequestMapping("/api/reps")
 public class RepController {
     @Autowired
-    private VirginaRepService virginaRepService;
+    private RepService service;
 
     @GetMapping()
-    public ResponseEntity<List<VirginaReps>> getAllVirginaReps() {
-        return new ResponseEntity<List<VirginaReps>>(virginaRepService.getAllVirginaReps(), HttpStatus.OK);
+    public ResponseEntity<List<Reps>> getAllReps() {
+        return new ResponseEntity<List<Reps>>(service.getAllReps(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{state}")
+    public ResponseEntity<List<Reps>> getReps(@PathParam("state") String state ) {
+        return new ResponseEntity<List<Reps>>(service.getRepsFrom(state), HttpStatus.OK);
     }
     
 }

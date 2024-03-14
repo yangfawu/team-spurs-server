@@ -21,5 +21,5 @@ public class Demographics {
 
     private Double percent_makeup;
 
-    //private String State;
+    private String state;
 }

@@ -1,4 +1,4 @@
-package cse416.teamspurs.server.Representatives.Virgina;
+package cse416.teamspurs.server.Representatives;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -8,12 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "virginia-legislators")
+@Document(collection = "legislators")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class VirginaReps {
+public class Reps {
     @Id
     private ObjectId id;
 
@@ -31,5 +31,5 @@ public class VirginaReps {
 
     private String image;
 
-    //private String State;
+    private String state;
 }
