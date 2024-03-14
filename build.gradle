@@ -19,6 +19,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// https://mvnrepository.com/artifact/me.paulschwarz/spring-dotenv
+	implementation 'me.paulschwarz:spring-dotenv:4.0.0'
+	
+	// https://mvnrepository.com/artifact/org.projectlombok/lombok
+	compileOnly 'org.projectlombok:lombok:1.18.30'
 }
 
 tasks.named('test') {
