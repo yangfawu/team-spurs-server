@@ -10,4 +10,6 @@ public interface DistrictRepository extends MongoRepository<District, ObjectId>{
 
     public List<District> findByState(String state);
 
+    public List<District> findByStateIncludeAllButState(String state);
+
 }

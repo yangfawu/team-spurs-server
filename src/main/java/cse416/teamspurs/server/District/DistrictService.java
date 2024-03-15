@@ -19,4 +19,11 @@ public class DistrictService {
     {
         return repo.findByState(state);
     }
+
+    public Integer getMaxPop(String state, String label)
+    {
+        return getDistrictsFrom(state).max();
+        
+        //findFirstByOrderBySeatNumberAsc();
+    }
 }
