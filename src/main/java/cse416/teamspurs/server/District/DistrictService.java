@@ -31,38 +31,43 @@ public class DistrictService {
 
     public Integer getMaxPopFrom(String state, String group)
     {
-        switch (group) {
-            case "total":
-                return repo.findTopByStateOrderByTotalPopulationDesc(state).getTotalPop();
-                
-            case "hispanic_latino":
-                return repo.findTopByStateOrderByHispanicLatinoDesc(state).getHispanic_Latino();
-            
-            case "white":
-                return repo.findTopByStateOrderByWhiteDesc(state).getWhite();
-            
-            case "black":
-                return repo.findTopByStateOrderByBlackDesc(state).getBlack();
-
-            case "american_indian_alaska_native":
-                return repo.findTopByStateOrderByAmericanIndianAlaskaNativeDesc(state).getAlaska();
-
-            case "asian":
-                return repo.findTopByStateOrderByAsianDesc(state).getAsian();
-
-            case "hawaiian_pacific_islander":
-                return repo.findTopByStateOrderByHawaiianPacificIslanderDesc(state).getHawaiian_pacific_islander();
-
-            case "other":
-                return repo.findTopByStateOrderByOtherDesc(state).getOther();
-
-            case "mixed":
-                return repo.findTopByStateOrderByMixedDesc(state).getMixed();
-
-            default:
-                return repo.findTopByStateOrderByTotalPopulationDesc(state).getTotalPop();
-        }
+        return repo.getTopWhiteDistrictIn(state).getWhite();
     }
+
+    // public Integer getMaxPopFrom(String state, String group)
+    // {
+    //     switch (group) {
+    //         case "total":
+    //             return repo.findTopByStateOrderByTotalPopulationDesc(state).getTotalPop();
+                
+    //         case "hispanic_latino":
+    //             return repo.findTopByStateOrderByHispanicLatinoDesc(state).getHispanic_Latino();
+            
+    //         case "white":
+    //             return repo.findTopByStateOrderByWhiteDesc(state).getWhite();
+            
+    //         case "black":
+    //             return repo.findTopByStateOrderByBlackDesc(state).getBlack();
+
+    //         case "american_indian_alaska_native":
+    //             return repo.findTopByStateOrderByAmericanIndianAlaskaNativeDesc(state).getAlaska();
+
+    //         case "asian":
+    //             return repo.findTopByStateOrderByAsianDesc(state).getAsian();
+
+    //         case "hawaiian_pacific_islander":
+    //             return repo.findTopByStateOrderByHawaiianPacificIslanderDesc(state).getHawaiian_pacific_islander();
+
+    //         case "other":
+    //             return repo.findTopByStateOrderByOtherDesc(state).getOther();
+
+    //         case "mixed":
+    //             return repo.findTopByStateOrderByMixedDesc(state).getMixed();
+
+    //         default:
+    //             return repo.findTopByStateOrderByTotalPopulationDesc(state).getTotalPop();
+    //     }
+    // }
 
     // public Integer getMaxWhiteFrom(String state)
     // {
