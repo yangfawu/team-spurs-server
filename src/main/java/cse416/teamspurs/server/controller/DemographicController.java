@@ -21,7 +21,7 @@ public class DemographicController {
 
     @GetMapping("/pop/{state}")
     public ResponseEntity<List<Demographic>> getDemoFrom(@PathVariable("state") String state) {
-        return new ResponseEntity<List<Demographic>>(service.getDemoFrom(state), HttpStatus.OK);
+        return new ResponseEntity<List<Demographic>>(service.getDemographicsByState(state), HttpStatus.OK);
     }
 
     @GetMapping()

@@ -17,7 +17,8 @@ public class District {
     @Id
     private ObjectId Id;
 
-    private Integer district;
+    @Field("district")
+    private Integer districtId;
 
     @Field("total_population")
     private Integer total;

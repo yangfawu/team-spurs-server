@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
+import cse416.teamspurs.server.converter.StringToGroupConverter;
 import cse416.teamspurs.server.converter.StringToStateConverter;
 import cse416.teamspurs.server.dto.HeatMapDto;
 import cse416.teamspurs.server.service.DemographicService;
@@ -23,27 +25,25 @@ public class DistrictController {
     @Autowired
     private DemographicService demoService;
 
+    @SuppressWarnings("unused")
     @Autowired
     private StringToStateConverter stateConverter;
 
-    // @GetMapping()
-    // public ResponseEntity <List<District>> getAllDistricts()
-    // {
-    // return new ResponseEntity<List<District>>(service.getAllDistrict(),
-    // HttpStatus.OK);
-    // }
+    @SuppressWarnings("unused")
+    @Autowired
+    private StringToGroupConverter groupConverter;
 
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
     public ResponseEntity<HeatMapDto> getMaxPopFrom(
             @PathVariable("state") State state,
-            @PathVariable("group") String group) {
-        HeatMapDto response = new HeatMapDto();
-        response.setMin(districtService.getMinPopFrom(state, group));
-        response.setmax(districtService.getMaxPopFrom(state, group));
-        response.setTotal(demoService.getGroupDemoFrom(state, group));
-        response.setDistricts(districtService.getDistrictsFrom(state));
+            @PathVariable("group") Group group) {
+        var min = districtService.getMinPopulationByStateAndGroup(state, group);
+        var max = districtService.getMaxPopulationByStateAndGroup(state, group);
+        var total = demoService.getDemographicByStateAndGroup(state, group).getPopulation();
+        var districts = districtService.getDistrictsByState(state);
 
-        return new ResponseEntity<HeatMapDto>(response, HttpStatus.OK);
+        var response = new HeatMapDto(min, max, total, districts);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
