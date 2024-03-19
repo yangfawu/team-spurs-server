@@ -22,4 +22,9 @@ public class Demographics {
     private Double percent_makeup;
 
     private String state;
+
+    public Integer getPopulation()
+    {
+        return population;
+    }
 }

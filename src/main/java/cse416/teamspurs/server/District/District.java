@@ -2,7 +2,6 @@ package cse416.teamspurs.server.District;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.aggregation.ArrayOperators.In;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -12,4 +12,6 @@ public interface DemographicsRespository extends MongoRepository<Demographics, O
 
     public List<Demographics> findByState(String state);
 
+    public Demographics findByStateAndLabel(String state, String group);
+
 }

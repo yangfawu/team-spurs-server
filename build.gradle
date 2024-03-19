@@ -25,6 +25,11 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/org.projectlombok/lombok
 	compileOnly 'org.projectlombok:lombok:1.18.30'
+
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation 'org.json:json:20240303'
+
+
 }
 
 tasks.named('test') {

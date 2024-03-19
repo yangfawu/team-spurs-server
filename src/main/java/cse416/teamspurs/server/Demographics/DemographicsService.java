@@ -25,4 +25,9 @@ public class DemographicsService {
         return repo.findByState(state);
     }
 
+    public Integer getGroupDemoFrom(String state, String group)
+    {
+        return repo.findByStateAndLabel(state, group).getPopulation();
+    }
+
 }

@@ -3,16 +3,20 @@ package cse416.teamspurs.server.District;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
 public interface DistrictRepository extends MongoRepository<District, ObjectId>{
 
+    //query that returns all districts in a state
     public List<District> findByState(String state);
 
-    //public District findTopByStateOrderByTotalPopulationDesc(String state);
+    //Aggregation for max value of a field
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'total_population' : -1 }}",
+                            "{$limit: 1}"})
+    public District getTopTotalPopDistrict(String state);
 
     @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
                             "{$sort: { 'hispanic_latino' : -1 }}",
@@ -34,11 +38,69 @@ public interface DistrictRepository extends MongoRepository<District, ObjectId>{
                             "{$limit: 1}"})
     public District getTopAlaskaDistrictIn(String state);
 
-    // public District findTopByStateOrderByAsianDesc(String state);
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'asian' : -1 }}",
+                            "{$limit: 1}"})
+    public District getTopAsianDistrict(String state);
 
-    // public District findTopByStateOrderByHawaiianPacificIslanderDesc(String state);
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'hawaiian_pacific_islander' : -1 }}",
+                            "{$limit: 1}"})
+    public District getTopPacificDistrict(String state);
 
-    // public District findTopByStateOrderByOtherDesc(String state);
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'other' : -1 }}",
+                            "{$limit: 1}"})
+    public District getTopOtherDistrict(String state);
 
-    // public District findTopByStateOrderByMixedDesc(String state);
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'mixed' : -1 }}",
+                            "{$limit: 1}"})
+    public District getTopMixedDistrict(String state);
+
+///////////////Aggregation for minimum value of a field///////////////////////////
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'total_population' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinTotalPopDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'white' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMimWhiteDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'hispanic_latino' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinLatinoDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'black' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinBlackDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'american_indian_alaska_native' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinAlaskaDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'asian' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinAsianDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'hawaiian_pacific_islander' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinPacificDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'other' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinOtherDistrict(String state);
+
+    @Aggregation(pipeline = {"{ $match: { 'state' : ?0 } }", 
+                            "{$sort: { 'mixed' : 1 }}",
+                            "{$limit: 1}"})
+    public District getMinMixedDistrict(String state);
 }
