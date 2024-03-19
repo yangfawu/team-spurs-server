@@ -18,6 +18,8 @@ public class ExtremeDistrictProjection extends BaseDistrict {
     @Id
     private ObjectId id;
 
-    private int count;
+    private int min;
+
+    private int max;
 
 }

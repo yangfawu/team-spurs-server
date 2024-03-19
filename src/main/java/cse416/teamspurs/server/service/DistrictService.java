@@ -9,6 +9,7 @@ import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dao.DistrictDao;
 import cse416.teamspurs.server.model.District;
+import cse416.teamspurs.server.model.ExtremeDistrictProjection;
 
 @Service
 public class DistrictService {
@@ -30,34 +31,18 @@ public class DistrictService {
     }
 
     /**
-     * Retrieves the district in a state with the highest population for a specific
-     * group
+     * Retrieves the lowest and highest population count for a specific group in a
+     * state.
      * 
      * @param state the state to retrieve the district from
      * @param group the group to retrieve the district for
-     * @return the district in the specified state with the highest population for
-     *         the specified group
+     * @return the lowest and highest population count for the specified group in
+     *         the specified state
      */
-    public int getMaxPopulationByStateAndGroup(State state, Group group) {
+    public ExtremeDistrictProjection getExtremeByStateAndGroup(State state, Group group) {
         var mongoState = state.getLabel();
         var mongoGroup = group.getLabel();
-        var district = repo.getDistrictByHighestGroupPopulation(mongoState, mongoGroup);
-        return district.getCount();
+        return repo.getExtremeDistrictByStateAndGroup(mongoState, mongoGroup);
     }
 
-    /**
-     * Retrieves the district in a state with the lowest population for a specific
-     * group.
-     * 
-     * @param state the state to retrieve the district from
-     * @param group the group to retrieve the district for
-     * @return the district in the specified state with the lowest population for
-     *         the specified group
-     */
-    public int getMinPopulationByStateAndGroup(State state, Group group) {
-        var mongoState = state.getLabel();
-        var mongoGroup = group.getLabel();
-        var district = repo.getDistrictByLowestGroupPopulation(mongoState, mongoGroup);
-        return district.getCount();
-    }
 }

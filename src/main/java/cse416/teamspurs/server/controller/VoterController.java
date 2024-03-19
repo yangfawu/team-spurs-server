@@ -7,4 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/eco")
 public class VoterController {
 
+    // TODO: Implement the VoterController
+
 }
