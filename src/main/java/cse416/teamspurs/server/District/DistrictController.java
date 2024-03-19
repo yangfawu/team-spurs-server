@@ -35,11 +35,24 @@ public class DistrictController {
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
     public ResponseEntity <MapResponse> getMaxPopFrom(@PathVariable("state") String state, @PathVariable("group") String group)
     {
+        switch(state)
+        {
+            case "nj":
+                state = "New Jersey";
+                break;
+            case "va":
+                state = "Virginia";
+                break;
+            default:
+                state = "New Jersey";
+                break;
+        }
+
         MapResponse response = new MapResponse();
         response.setMin(districtService.getMinPopFrom(state, group));
         response.setmax(districtService.getMaxPopFrom(state, group));
-        response.setTotal(demoService.getGroupDemoFrom(state, "White"));
-
+        response.setTotal(demoService.getGroupDemoFrom(state, group));
+        response.setDistricts(districtService.getDistrictsFrom(state));
 
         return new ResponseEntity<MapResponse>(response, HttpStatus.OK);
     } 
