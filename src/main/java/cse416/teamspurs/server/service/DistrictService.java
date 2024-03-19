@@ -25,34 +25,26 @@ public class DistrictService {
     public Integer getMaxPopFrom(String state, String group) {
         switch (group) {
             case "total":
-                return repo.getTopTotalPopDistrict(state).getTotalPop();
-
+                return repo.getTopTotalPopDistrict(state).getTotal();
             case "hispanic_latino":
-                return repo.getTopLatinoDistrictIn(state).getHispanic_Latino();
-
+                return repo.getTopLatinoDistrictIn(state).getHl();
             case "white":
                 return repo.getTopWhiteDistrictIn(state).getWhite();
-
             case "black":
                 return repo.getTopBlackDistrictIn(state).getBlack();
 
             case "american_indian_alaska_native":
-                return repo.getTopAlaskaDistrictIn(state).getAlaska();
-
+                return repo.getTopAlaskaDistrictIn(state).getAian();
             case "asian":
                 return repo.getTopAsianDistrict(state).getAsian();
-
             case "hawaiian_pacific_islander":
-                return repo.getTopPacificDistrict(state).getHawaiian_pacific_islander();
-
+                return repo.getTopPacificDistrict(state).getHpi();
             case "other":
                 return repo.getTopOtherDistrict(state).getOther();
-
             case "mixed":
                 return repo.getTopMixedDistrict(state).getMixed();
-
             default:
-                return repo.getTopTotalPopDistrict(state).getTotalPop();
+                return repo.getTopTotalPopDistrict(state).getTotal();
         }
     }
 
@@ -60,34 +52,31 @@ public class DistrictService {
     public Integer getMinPopFrom(String state, String group) {
         switch (group) {
             case "total":
-                return repo.getTopTotalPopDistrict(state).getTotalPop();
+                return repo.getTopTotalPopDistrict(state).getTotal();
 
             case "hispanic_latino":
-                return repo.getMinLatinoDistrict(state).getHispanic_Latino();
-
+                return repo.getMinLatinoDistrict(state).getHl();
             case "white":
                 return repo.getMimWhiteDistrict(state).getWhite();
-
             case "black":
                 return repo.getMinBlackDistrict(state).getBlack();
 
             case "american_indian_alaska_native":
-                return repo.getMinAlaskaDistrict(state).getAlaska();
+                return repo.getMinAlaskaDistrict(state).getAian();
 
             case "asian":
                 return repo.getMinAsianDistrict(state).getAsian();
 
             case "hawaiian_pacific_islander":
-                return repo.getMinPacificDistrict(state).getHawaiian_pacific_islander();
+                return repo.getMinPacificDistrict(state).getHpi();
 
             case "other":
                 return repo.getMinOtherDistrict(state).getOther();
 
             case "mixed":
                 return repo.getMinMixedDistrict(state).getMixed();
-
             default:
-                return repo.getMinTotalPopDistrict(state).getTotalPop();
+                return repo.getMinTotalPopDistrict(state).getTotal();
         }
     }
 }

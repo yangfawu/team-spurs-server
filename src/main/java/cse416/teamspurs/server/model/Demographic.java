@@ -24,7 +24,4 @@ public class Demographic {
 
     private String state;
 
-    public Integer getPopulation() {
-        return population;
-    }
 }
