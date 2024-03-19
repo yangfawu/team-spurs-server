@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cse416.teamspurs.server.dao.DemographicRespository;
+import cse416.teamspurs.server.constant.State;
+import cse416.teamspurs.server.dao.DemographicDao;
 import cse416.teamspurs.server.model.Demographic;
 
 @Service
 public class DemographicService {
     @Autowired
-    private DemographicRespository repo;
+    private DemographicDao repo;
 
     public List<Demographic> getAllDemographics() {
         return repo.findAll();
@@ -25,8 +26,9 @@ public class DemographicService {
         return repo.findByState(state);
     }
 
-    public Integer getGroupDemoFrom(String state, String group) {
-        return repo.findByStateAndLabel(state, group).getPopulation();
+    public Integer getGroupDemoFrom(State state, String group) {
+        var mongoState = state.getLabel();
+        return repo.findByStateAndLabel(mongoState, group).getPopulation();
     }
 
 }

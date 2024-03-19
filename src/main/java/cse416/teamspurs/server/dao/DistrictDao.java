@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import cse416.teamspurs.server.model.District;
 
 @Repository
-public interface DistrictRepository extends MongoRepository<District, ObjectId> {
+public interface DistrictDao extends MongoRepository<District, ObjectId> {
 
         // query that returns all districts in a state
         public List<District> findByState(String state);

@@ -6,7 +6,7 @@ import cse416.teamspurs.server.model.District;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class HeatMapDTO {
+public class HeatMapDto {
     private Integer min;
     private Integer max;
     private Integer total;

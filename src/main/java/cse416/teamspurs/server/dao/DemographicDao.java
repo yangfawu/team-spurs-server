@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import cse416.teamspurs.server.model.Demographic;
 
 @Repository
-public interface DemographicRespository extends MongoRepository<Demographic, ObjectId> {
+public interface DemographicDao extends MongoRepository<Demographic, ObjectId> {
 
     public List<Demographic> findByLabel(String label);
 

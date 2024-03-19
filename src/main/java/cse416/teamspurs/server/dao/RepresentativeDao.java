@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import cse416.teamspurs.server.model.Representative;
 
 @Repository
-public interface RepresentativeRepository extends MongoRepository<Representative, ObjectId> {
+public interface RepresentativeDao extends MongoRepository<Representative, ObjectId> {
     public List<Representative> findByParty(String party);
 
     public List<Representative> findByRace(String race);

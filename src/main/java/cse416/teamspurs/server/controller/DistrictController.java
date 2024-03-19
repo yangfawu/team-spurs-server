@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import cse416.teamspurs.server.dto.HeatMapDTO;
+import cse416.teamspurs.server.constant.State;
+import cse416.teamspurs.server.converter.StringToStateConverter;
+import cse416.teamspurs.server.dto.HeatMapDto;
 import cse416.teamspurs.server.service.DemographicService;
 import cse416.teamspurs.server.service.DistrictService;
 
@@ -21,6 +23,9 @@ public class DistrictController {
     @Autowired
     private DemographicService demoService;
 
+    @Autowired
+    private StringToStateConverter stateConverter;
+
     // @GetMapping()
     // public ResponseEntity <List<District>> getAllDistricts()
     // {
@@ -29,27 +34,16 @@ public class DistrictController {
     // }
 
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
-    public ResponseEntity<HeatMapDTO> getMaxPopFrom(@PathVariable("state") String state,
+    public ResponseEntity<HeatMapDto> getMaxPopFrom(
+            @PathVariable("state") State state,
             @PathVariable("group") String group) {
-        switch (state) {
-            case "nj":
-                state = "New Jersey";
-                break;
-            case "va":
-                state = "Virginia";
-                break;
-            default:
-                state = "New Jersey";
-                break;
-        }
-
-        HeatMapDTO response = new HeatMapDTO();
+        HeatMapDto response = new HeatMapDto();
         response.setMin(districtService.getMinPopFrom(state, group));
         response.setmax(districtService.getMaxPopFrom(state, group));
         response.setTotal(demoService.getGroupDemoFrom(state, group));
         response.setDistricts(districtService.getDistrictsFrom(state));
 
-        return new ResponseEntity<HeatMapDTO>(response, HttpStatus.OK);
+        return new ResponseEntity<HeatMapDto>(response, HttpStatus.OK);
     }
 
 }

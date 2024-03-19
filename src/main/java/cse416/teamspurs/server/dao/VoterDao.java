@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import cse416.teamspurs.server.model.Voter;
 
 @Repository
-public interface VoterRepository extends MongoRepository<Voter, ObjectId> {
+public interface VoterDao extends MongoRepository<Voter, ObjectId> {
     public List<Voter> findByParty(String party);
 
     public List<Voter> findByState(String state);
