@@ -20,13 +20,13 @@ public class RepresentativeController {
     @Autowired
     private RepresentativeService service;
 
-    @GetMapping()
-    public ResponseEntity<List<Representative>> getAllReps() {
-        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
-    }
+    // @GetMapping()
+    // public ResponseEntity<List<Representative>> getAllReps() {
+    //     return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
+    // }
 
     @GetMapping("/{state}")
-    public ResponseEntity<List<Representative>> getReps(@PathVariable("state") State state) {
+    public ResponseEntity<List<Representative>> getRepsByState(@PathVariable("state") State state) {
         return new ResponseEntity<>(service.getAllByState(state), HttpStatus.OK);
     }
 

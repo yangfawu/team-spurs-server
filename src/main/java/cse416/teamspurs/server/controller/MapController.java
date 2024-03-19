@@ -1,5 +1,7 @@
 package cse416.teamspurs.server.controller;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dto.HeatMapDto;
-import cse416.teamspurs.server.service.DemographicService;
+import cse416.teamspurs.server.model.District;
 import cse416.teamspurs.server.service.DistrictService;
 import cse416.teamspurs.server.service.MapService;
 
@@ -19,29 +21,40 @@ import cse416.teamspurs.server.service.MapService;
 @RequestMapping("/api/map")
 public class MapController {
     @Autowired
-    private MapService service;
+    private MapService mapService;
 
     @Autowired
     private DistrictService districtService;
 
-    @Autowired
-    private DemographicService demoService;
-
-    @GetMapping(path = "/regular/{state}", produces = "application/json")
-    public ResponseEntity<Object> getReps(@PathVariable("state") State state) {
-        return new ResponseEntity<>(service.getDistrictMap(state), HttpStatus.OK);
+    @GetMapping(path = "/regular/{state}")
+    public ResponseEntity<Object> getReps(
+            @PathVariable("state") State state) {
+        return new ResponseEntity<>(mapService.getDistrictMap(state), HttpStatus.OK);
     }
 
-    @GetMapping(path = "heat/{state}/{group}", produces = "application/json")
+    @GetMapping(path = "/heat/{state}/{group}")
     public ResponseEntity<HeatMapDto> getMaxPopFrom(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
-        var min = districtService.getMinPopulationByStateAndGroup(state, group);
-        var max = districtService.getMaxPopulationByStateAndGroup(state, group);
-        var total = demoService.getDemographicByStateAndGroup(state, group).getPopulation();
-        var districts = districtService.getDistrictsByState(state);
+        var map = mapService.getDistrictMap(state);
 
-        var response = new HeatMapDto(min, max, total, districts);
+        var extreme = districtService.getExtremeByStateAndGroup(state, group);
+        var min = extreme.getMin();
+        var max = extreme.getMax();
+
+        var districts = districtService.getDistrictsByState(state);
+        var table = new HashMap<Integer, District>();
+        for (var d : districts) {
+            table.put(d.getDistrictId(), d);
+        }
+
+        var key = group.getLabel();
+        var response = new HeatMapDto(
+                min,
+                max,
+                key,
+                table,
+                map);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

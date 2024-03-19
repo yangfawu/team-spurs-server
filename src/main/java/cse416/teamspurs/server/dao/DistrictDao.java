@@ -25,33 +25,15 @@ public interface DistrictDao extends MongoRepository<BaseDistrict, ObjectId> {
         public List<District> findByState(String state);
 
         /**
-         * Retrieves the district in a state with the highest population for a specific
-         * group.
-         * 
-         * @param state the state to retrieve the district from
-         * @param group the group to retrieve the district for
-         * @return the district in the specified state with the highest population for
-         *         the specified group
+         * Retrieves the lowest and highest population count for a specific group in a state.
+         * @param state the state to retrieve the info from
+         * @param group the group to retrieve the info for
+         * @return the lowest and highest population count for the specified group in the specified state
          */
         @Aggregation(pipeline = {
                         "{ $match: { state: ?0 } }",
-                        "{ $group: { _id: null, count: { $max: '$?1' } } }",
+                        "{ $group: { _id: null, min: { $min: '$?1' }, max: { $max: '$?1' } } }",
         })
-        public ExtremeDistrictProjection getDistrictByHighestGroupPopulation(String state, String group);
-
-        /**
-         * Retrieves the district in a state with the lowest population for a specific
-         * group.
-         * 
-         * @param state the state to retrieve the district from
-         * @param group the group to retrieve the district for
-         * @return the district in the specified state with the lowest population for
-         *         the specified group
-         */
-        @Aggregation(pipeline = {
-                        "{ $match: { state: ?0 } }",
-                        "{ $group: { _id: null, count: { $min: '$?1' } } }",
-        })
-        public ExtremeDistrictProjection getDistrictByLowestGroupPopulation(String state, String group);
+        public ExtremeDistrictProjection getExtremeDistrictByStateAndGroup(String state, String group);
 
 }
