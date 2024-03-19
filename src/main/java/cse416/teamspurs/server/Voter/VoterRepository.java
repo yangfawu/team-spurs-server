@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface VoterRepository extends MongoRepository<Voter, ObjectId>{
-    public List <Voter> findByParty(String party);
+public interface VoterRepository extends MongoRepository<Voter, ObjectId> {
+    public List<Voter> findByParty(String party);
 
-    public List <Voter> findByState(String state);
+    public List<Voter> findByState(String state);
 
 }

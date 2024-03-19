@@ -10,29 +10,26 @@ public class DistrictService {
     @Autowired
     private DistrictRepository repo;
 
-    public List<District> getAllDistrict()
-    {
+    public List<District> getAllDistrict() {
         return repo.findAll();
     }
 
-    public List<District> getDistrictsFrom(String state)
-    {
+    public List<District> getDistrictsFrom(String state) {
         return repo.findByState(state);
     }
 
-    //return the district in a state with the max value for a group pop
-    public Integer getMaxPopFrom(String state, String group)
-    {
+    // return the district in a state with the max value for a group pop
+    public Integer getMaxPopFrom(String state, String group) {
         switch (group) {
             case "total":
                 return repo.getTopTotalPopDistrict(state).getTotalPop();
-                
+
             case "hispanic_latino":
                 return repo.getTopLatinoDistrictIn(state).getHispanic_Latino();
-            
+
             case "white":
                 return repo.getTopWhiteDistrictIn(state).getWhite();
-            
+
             case "black":
                 return repo.getTopBlackDistrictIn(state).getBlack();
 
@@ -56,19 +53,18 @@ public class DistrictService {
         }
     }
 
-    //returns the district in a state with the min value for a group pop
-    public Integer getMinPopFrom(String state, String group)
-    {
+    // returns the district in a state with the min value for a group pop
+    public Integer getMinPopFrom(String state, String group) {
         switch (group) {
             case "total":
                 return repo.getTopTotalPopDistrict(state).getTotalPop();
-                
+
             case "hispanic_latino":
                 return repo.getMinLatinoDistrict(state).getHispanic_Latino();
-            
+
             case "white":
                 return repo.getMimWhiteDistrict(state).getWhite();
-            
+
             case "black":
                 return repo.getMinBlackDistrict(state).getBlack();
 

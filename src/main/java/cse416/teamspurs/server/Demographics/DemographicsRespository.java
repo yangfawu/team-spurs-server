@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DemographicsRespository extends MongoRepository<Demographics, ObjectId>{
-    
+public interface DemographicsRespository extends MongoRepository<Demographics, ObjectId> {
+
     public List<Demographics> findByLabel(String label);
 
     public List<Demographics> findByState(String state);

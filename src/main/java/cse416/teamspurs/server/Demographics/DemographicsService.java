@@ -10,23 +10,19 @@ public class DemographicsService {
     @Autowired
     private DemographicsRespository repo;
 
-    public List<Demographics> getAllDemographics()
-    {
+    public List<Demographics> getAllDemographics() {
         return repo.findAll();
     }
 
-    public List<Demographics> getLabelInfo(String label)
-    {
+    public List<Demographics> getLabelInfo(String label) {
         return repo.findByLabel(label);
     }
 
-    public List<Demographics> getDemoFrom(String state)
-    {
+    public List<Demographics> getDemoFrom(String state) {
         return repo.findByState(state);
     }
 
-    public Integer getGroupDemoFrom(String state, String group)
-    {
+    public Integer getGroupDemoFrom(String state, String group) {
         return repo.findByStateAndLabel(state, group).getPopulation();
     }
 

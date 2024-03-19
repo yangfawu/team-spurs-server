@@ -10,13 +10,11 @@ public class RepService {
     @Autowired
     private RepRepository repo;
 
-    public List<Reps> getAllReps()
-    {
+    public List<Reps> getAllReps() {
         return repo.findAll();
     }
 
-    public List<Reps> getRepsFrom(String state)
-    {
+    public List<Reps> getRepsFrom(String state) {
         return repo.findByState(state);
     }
 

@@ -29,14 +29,14 @@ public class DistrictController {
     // @GetMapping()
     // public ResponseEntity <List<District>> getAllDistricts()
     // {
-    //     return new ResponseEntity<List<District>>(service.getAllDistrict(), HttpStatus.OK);
+    // return new ResponseEntity<List<District>>(service.getAllDistrict(),
+    // HttpStatus.OK);
     // }
 
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
-    public ResponseEntity <MapResponse> getMaxPopFrom(@PathVariable("state") String state, @PathVariable("group") String group)
-    {
-        switch(state)
-        {
+    public ResponseEntity<MapResponse> getMaxPopFrom(@PathVariable("state") String state,
+            @PathVariable("group") String group) {
+        switch (state) {
             case "nj":
                 state = "New Jersey";
                 break;
@@ -55,6 +55,6 @@ public class DistrictController {
         response.setDistricts(districtService.getDistrictsFrom(state));
 
         return new ResponseEntity<MapResponse>(response, HttpStatus.OK);
-    } 
-    
+    }
+
 }

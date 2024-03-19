@@ -22,8 +22,8 @@ public class RepController {
     }
 
     @GetMapping("/{state}")
-    public ResponseEntity<List<Reps>> getReps(@PathVariable("state") String state ) {
+    public ResponseEntity<List<Reps>> getReps(@PathVariable("state") String state) {
         return new ResponseEntity<List<Reps>>(service.getRepsFrom(state), HttpStatus.OK);
     }
-    
+
 }

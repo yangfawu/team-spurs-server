@@ -23,8 +23,7 @@ public class Demographics {
 
     private String state;
 
-    public Integer getPopulation()
-    {
+    public Integer getPopulation() {
         return population;
     }
 }

@@ -37,48 +37,39 @@ public class District {
 
     private String state;
 
-    public Integer getDistrict()
-    {
+    public Integer getDistrict() {
         return district;
     }
 
-    public Integer getTotalPop()
-    {
+    public Integer getTotalPop() {
         return total_population;
     }
 
-    public Integer getHispanic_Latino()
-    {
+    public Integer getHispanic_Latino() {
         return hispanic_latino;
     }
 
-    public Integer getWhite()
-    {
+    public Integer getWhite() {
         return white;
     }
 
-    public Integer getBlack()
-    {
+    public Integer getBlack() {
         return black;
     }
 
-    public Integer getAlaska()
-    {
+    public Integer getAlaska() {
         return american_indian_alaska_native;
     }
 
-    public Integer getOther()
-    {
+    public Integer getOther() {
         return other;
     }
 
-    public Integer getMixed()
-    {
+    public Integer getMixed() {
         return mixed;
     }
 
-    public String getState()
-    {
+    public String getState() {
         return state;
     }
 }
