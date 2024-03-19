@@ -8,10 +8,12 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import cse416.teamspurs.server.model.BaseDistrict;
 import cse416.teamspurs.server.model.District;
+import cse416.teamspurs.server.model.ExtremeDistrictProjection;
 
 @Repository
-public interface DistrictDao extends MongoRepository<District, ObjectId> {
+public interface DistrictDao extends MongoRepository<BaseDistrict, ObjectId> {
 
         /**
          * Retrieves all districts in a specific state.
@@ -32,11 +34,10 @@ public interface DistrictDao extends MongoRepository<District, ObjectId> {
          *         the specified group
          */
         @Aggregation(pipeline = {
-                        "{ $match: { 'state' : ?0 } }",
-                        "{ $sort: { ?1 : -1 } }",
-                        "{ $limit: 1 }"
+                        "{ $match: { state: ?0 } }",
+                        "{ $group: { _id: null, count: { $max: '$?1' } } }",
         })
-        public District getDistrictByHighestGroupPopulation(String state, String group);
+        public ExtremeDistrictProjection getDistrictByHighestGroupPopulation(String state, String group);
 
         /**
          * Retrieves the district in a state with the lowest population for a specific
@@ -48,10 +49,9 @@ public interface DistrictDao extends MongoRepository<District, ObjectId> {
          *         the specified group
          */
         @Aggregation(pipeline = {
-                        "{ $match: { 'state' : ?0 } }",
-                        "{ $sort: { ?1 : 1 } }",
-                        "{ $limit: 1 }"
+                        "{ $match: { state: ?0 } }",
+                        "{ $group: { _id: null, count: { $min: '$?1' } } }",
         })
-        public District getDistrictByLowestGroupPopulation(String state, String group);
+        public ExtremeDistrictProjection getDistrictByLowestGroupPopulation(String state, String group);
 
 }

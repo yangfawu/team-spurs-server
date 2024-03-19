@@ -38,31 +38,11 @@ public class DistrictService {
      * @return the district in the specified state with the highest population for
      *         the specified group
      */
-    public Integer getMaxPopulationByStateAndGroup(State state, Group group) {
+    public int getMaxPopulationByStateAndGroup(State state, Group group) {
         var mongoState = state.getLabel();
         var mongoGroup = group.getLabel();
         var district = repo.getDistrictByHighestGroupPopulation(mongoState, mongoGroup);
-
-        switch (group) {
-            case HISPANIC_LATINO:
-                return district.getHl();
-            case WHITE:
-                return district.getWhite();
-            case BLACK:
-                return district.getBlack();
-            case AMERICAN_INDIAN_ALASKA_NATIVE:
-                return district.getAian();
-            case ASIAN:
-                return district.getAsian();
-            case HAWAIIAN_PACIFIC_ISLANDER:
-                return district.getHpi();
-            case OTHER:
-                return district.getOther();
-            case MIXED:
-                return district.getMixed();
-            default:
-                throw new IllegalStateException();
-        }
+        return district.getCount();
     }
 
     /**
@@ -74,30 +54,10 @@ public class DistrictService {
      * @return the district in the specified state with the lowest population for
      *         the specified group
      */
-    public Integer getMinPopulationByStateAndGroup(State state, Group group) {
+    public int getMinPopulationByStateAndGroup(State state, Group group) {
         var mongoState = state.getLabel();
         var mongoGroup = group.getLabel();
         var district = repo.getDistrictByLowestGroupPopulation(mongoState, mongoGroup);
-
-        switch (group) {
-            case HISPANIC_LATINO:
-                return district.getHl();
-            case WHITE:
-                return district.getWhite();
-            case BLACK:
-                return district.getBlack();
-            case AMERICAN_INDIAN_ALASKA_NATIVE:
-                return district.getAian();
-            case ASIAN:
-                return district.getAsian();
-            case HAWAIIAN_PACIFIC_ISLANDER:
-                return district.getHpi();
-            case OTHER:
-                return district.getOther();
-            case MIXED:
-                return district.getMixed();
-            default:
-                throw new IllegalStateException();
-        }
+        return district.getCount();
     }
 }
