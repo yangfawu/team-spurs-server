@@ -1,4 +1,4 @@
-package cse416.teamspurs.server.Representatives;
+package cse416.teamspurs.server.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class Reps {
+public class Representative {
     @Id
     private ObjectId id;
 

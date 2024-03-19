@@ -1,28 +1,25 @@
-package cse416.teamspurs.server.Voter;
-
-import org.springframework.data.mongodb.core.mapping.Document;
+package cse416.teamspurs.server.model;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.geo.GeoJson;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "legislators")
+@Document(collection = "geojson")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Voter {
+public class StateGeoJson {
+
     @Id
     private ObjectId Id;
 
-    private String party;
-
-    private Integer value;
-
-    private Double percent_of_VAP;
-
     private String state;
+
+    private GeoJson<?> collection;
 
 }
