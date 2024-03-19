@@ -1,21 +1,16 @@
-package cse416.teamspurs.server.District;
+package cse416.teamspurs.server.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import cse416.teamspurs.server.MapResponse;
-import cse416.teamspurs.server.Demographics.DemographicsService;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-//import java.util.List;
+import org.springframework.web.bind.annotation.RestController;
+
+import cse416.teamspurs.server.dto.HeatMapDTO;
+import cse416.teamspurs.server.service.DemographicService;
+import cse416.teamspurs.server.service.DistrictService;
 
 @RestController
 @RequestMapping("/api/distribution/legend")
@@ -24,7 +19,7 @@ public class DistrictController {
     private DistrictService districtService;
 
     @Autowired
-    private DemographicsService demoService;
+    private DemographicService demoService;
 
     // @GetMapping()
     // public ResponseEntity <List<District>> getAllDistricts()
@@ -34,7 +29,7 @@ public class DistrictController {
     // }
 
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
-    public ResponseEntity<MapResponse> getMaxPopFrom(@PathVariable("state") String state,
+    public ResponseEntity<HeatMapDTO> getMaxPopFrom(@PathVariable("state") String state,
             @PathVariable("group") String group) {
         switch (state) {
             case "nj":
@@ -48,13 +43,13 @@ public class DistrictController {
                 break;
         }
 
-        MapResponse response = new MapResponse();
+        HeatMapDTO response = new HeatMapDTO();
         response.setMin(districtService.getMinPopFrom(state, group));
         response.setmax(districtService.getMaxPopFrom(state, group));
         response.setTotal(demoService.getGroupDemoFrom(state, group));
         response.setDistricts(districtService.getDistrictsFrom(state));
 
-        return new ResponseEntity<MapResponse>(response, HttpStatus.OK);
+        return new ResponseEntity<HeatMapDTO>(response, HttpStatus.OK);
     }
 
 }

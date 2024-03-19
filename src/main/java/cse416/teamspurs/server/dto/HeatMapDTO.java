@@ -1,11 +1,12 @@
-package cse416.teamspurs.server;
+package cse416.teamspurs.server.dto;
 
-import cse416.teamspurs.server.District.District;
-import lombok.NoArgsConstructor;
 import java.util.List;
 
+import cse416.teamspurs.server.model.District;
+import lombok.NoArgsConstructor;
+
 @NoArgsConstructor
-public class MapResponse {
+public class HeatMapDTO {
     private Integer min;
     private Integer max;
     private Integer total;

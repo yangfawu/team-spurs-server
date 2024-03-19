@@ -1,9 +1,12 @@
-package cse416.teamspurs.server.Voter;
+package cse416.teamspurs.server.service;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import cse416.teamspurs.server.dao.VoterRepository;
+import cse416.teamspurs.server.model.Voter;
 
 @Service
 public class VoterService {
