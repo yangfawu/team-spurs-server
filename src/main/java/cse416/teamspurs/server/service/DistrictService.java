@@ -12,6 +12,7 @@ import cse416.teamspurs.server.model.District;
 
 @Service
 public class DistrictService {
+
     @Autowired
     private DistrictDao repo;
 

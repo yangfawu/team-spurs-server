@@ -23,10 +23,6 @@ public class DemographicService {
         return repo.findAll();
     }
 
-    // public List<Demographic> getLabelInfo(String label) {
-    //     return repo.findByLabel(label);
-    // }
-
     /**
      * Retrieves the demographic information for a specific state
      * @param state the state to retrieve the demographic information for

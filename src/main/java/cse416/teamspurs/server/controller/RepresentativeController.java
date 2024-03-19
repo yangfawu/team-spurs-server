@@ -21,12 +21,12 @@ public class RepresentativeController {
 
     @GetMapping()
     public ResponseEntity<List<Representative>> getAllReps() {
-        return new ResponseEntity<List<Representative>>(service.getAllReps(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{state}")
     public ResponseEntity<List<Representative>> getReps(@PathVariable("state") String state) {
-        return new ResponseEntity<List<Representative>>(service.getRepsFrom(state), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllByState(state), HttpStatus.OK);
     }
 
 }

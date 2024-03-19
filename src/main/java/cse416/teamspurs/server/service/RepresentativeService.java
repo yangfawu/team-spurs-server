@@ -10,14 +10,26 @@ import cse416.teamspurs.server.model.Representative;
 
 @Service
 public class RepresentativeService {
+
     @Autowired
     private RepresentativeDao repo;
 
-    public List<Representative> getAllReps() {
+    /**
+     * Retrieves all representatives.
+     * 
+     * @return a list of representatives
+     */
+    public List<Representative> getAll() {
         return repo.findAll();
     }
 
-    public List<Representative> getRepsFrom(String state) {
+    /**
+     * Retrieves all representatives by party.
+     * 
+     * @param party the party to retrieve representatives from
+     * @return a list of representatives in the specified party
+     */
+    public List<Representative> getAllByState(String state) {
         return repo.findByState(state);
     }
 

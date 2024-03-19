@@ -19,14 +19,14 @@ public class DemographicController {
     @Autowired
     private DemographicService service;
 
-    @GetMapping("/pop/{state}")
-    public ResponseEntity<List<Demographic>> getDemoFrom(@PathVariable("state") String state) {
-        return new ResponseEntity<List<Demographic>>(service.getDemographicsByState(state), HttpStatus.OK);
-    }
-
     @GetMapping()
     public ResponseEntity<List<Demographic>> getAllDemographics() {
-        return new ResponseEntity<List<Demographic>>(service.getAllDemographics(), HttpStatus.OK);
+        return new ResponseEntity<>(service.getAllDemographics(), HttpStatus.OK);
+    }
+
+    @GetMapping("/pop/{state}")
+    public ResponseEntity<List<Demographic>> getDemoFrom(@PathVariable("state") String state) {
+        return new ResponseEntity<>(service.getDemographicsByState(state), HttpStatus.OK);
     }
 
 }
