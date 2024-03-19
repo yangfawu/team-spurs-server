@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.service.RepresentativeService;
 
@@ -25,7 +26,7 @@ public class RepresentativeController {
     }
 
     @GetMapping("/{state}")
-    public ResponseEntity<List<Representative>> getReps(@PathVariable("state") String state) {
+    public ResponseEntity<List<Representative>> getReps(@PathVariable("state") State state) {
         return new ResponseEntity<>(service.getAllByState(state), HttpStatus.OK);
     }
 

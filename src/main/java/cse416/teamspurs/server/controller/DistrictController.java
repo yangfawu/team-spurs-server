@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.converter.StringToGroupConverter;
-import cse416.teamspurs.server.converter.StringToStateConverter;
 import cse416.teamspurs.server.dto.HeatMapDto;
 import cse416.teamspurs.server.service.DemographicService;
 import cse416.teamspurs.server.service.DistrictService;
@@ -24,14 +22,6 @@ public class DistrictController {
 
     @Autowired
     private DemographicService demoService;
-
-    @SuppressWarnings("unused")
-    @Autowired
-    private StringToStateConverter stateConverter;
-
-    @SuppressWarnings("unused")
-    @Autowired
-    private StringToGroupConverter groupConverter;
 
     @GetMapping(path = "/{state}/{group}", produces = "application/json")
     public ResponseEntity<HeatMapDto> getMaxPopFrom(

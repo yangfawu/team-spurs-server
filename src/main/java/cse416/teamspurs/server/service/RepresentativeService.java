@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dao.RepresentativeDao;
 import cse416.teamspurs.server.model.Representative;
 
@@ -29,8 +30,9 @@ public class RepresentativeService {
      * @param party the party to retrieve representatives from
      * @return a list of representatives in the specified party
      */
-    public List<Representative> getAllByState(String state) {
-        return repo.findByState(state);
+    public List<Representative> getAllByState(State state) {
+        var mongoState = state.getLabel();
+        return repo.findByState(mongoState);
     }
 
 }

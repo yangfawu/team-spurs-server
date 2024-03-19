@@ -17,6 +17,7 @@ public class DemographicService {
 
     /**
      * Retrieves all demographic information from the database
+     * 
      * @return a list of all demographic information in the database
      */
     public List<Demographic> getAllDemographics() {
@@ -25,15 +26,18 @@ public class DemographicService {
 
     /**
      * Retrieves the demographic information for a specific state
+     * 
      * @param state the state to retrieve the demographic information for
      * @return the demographic information for the specified state
      */
-    public List<Demographic> getDemographicsByState(String state) {
-        return repo.findByState(state);
+    public List<Demographic> getDemographicsByState(State state) {
+        var mongoState = state.getLabel();
+        return repo.findByState(mongoState);
     }
 
     /**
      * Retrieves the demographic information for a specific state and group
+     * 
      * @param state the state to retrieve the district from
      * @param group the group to retrieve the district for
      * @return the demographic information for the specified state and group

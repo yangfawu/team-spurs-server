@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.Demographic;
 import cse416.teamspurs.server.service.DemographicService;
 
@@ -25,7 +26,7 @@ public class DemographicController {
     }
 
     @GetMapping("/pop/{state}")
-    public ResponseEntity<List<Demographic>> getDemoFrom(@PathVariable("state") String state) {
+    public ResponseEntity<List<Demographic>> getDemoFrom(@PathVariable("state") State state) {
         return new ResponseEntity<>(service.getDemographicsByState(state), HttpStatus.OK);
     }
 
