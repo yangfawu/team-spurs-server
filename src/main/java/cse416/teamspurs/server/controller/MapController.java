@@ -1,6 +1,6 @@
 package cse416.teamspurs.server.controller;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,50 +12,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.dto.HeatMapDto;
-import cse416.teamspurs.server.model.District;
-import cse416.teamspurs.server.service.DistrictService;
+import cse416.teamspurs.server.dto.HeatMapDTO;
+import cse416.teamspurs.server.model.GeoJson;
 import cse416.teamspurs.server.service.MapService;
 
 @RestController
 @RequestMapping("/api/map")
 public class MapController {
-    @Autowired
-    private MapService mapService;
 
     @Autowired
-    private DistrictService districtService;
+    private MapService service;
 
     @GetMapping(path = "/regular/{state}")
-    public ResponseEntity<Object> getReps(
+    public ResponseEntity<List<GeoJson>> getReps(
             @PathVariable("state") State state) {
-        return new ResponseEntity<>(mapService.getDistrictMap(state), HttpStatus.OK);
+        var res = service.getAssemblyDistrictsByState(state);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping(path = "/heat/{state}/{group}")
-    public ResponseEntity<HeatMapDto> getMaxPopFrom(
+    public ResponseEntity<HeatMapDTO> getMaxPopFrom(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
-        var map = mapService.getDistrictMap(state);
-
-        var extreme = districtService.getExtremeByStateAndGroup(state, group);
-        var min = extreme.getMin();
-        var max = extreme.getMax();
-
-        var districts = districtService.getDistrictsByState(state);
-        var table = new HashMap<Integer, District>();
-        for (var d : districts) {
-            table.put(d.getDistrictId(), d);
-        }
-
-        var key = group.getLabel();
-        var response = new HeatMapDto(
-                min,
-                max,
-                key,
-                table,
-                map);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        var res = service.getHeatedAssymblyDistrictsByStateAndGroup(state, group);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 }

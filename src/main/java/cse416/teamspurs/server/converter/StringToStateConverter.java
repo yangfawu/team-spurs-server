@@ -12,9 +12,9 @@ public class StringToStateConverter implements Converter<String, State> {
     public State convert(String source) {
         switch (source) {
             case "nj":
-                return State.NJ;
+                return State.nj;
             case "va":
-                return State.VA;
+                return State.va;
             default:
                 return null;
         }

@@ -27,7 +27,8 @@ public class RepresentativeController {
 
     @GetMapping("/{state}")
     public ResponseEntity<List<Representative>> getRepsByState(@PathVariable("state") State state) {
-        return new ResponseEntity<>(service.getAllByState(state), HttpStatus.OK);
+        var res = service.getAllByState(state);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
 }
