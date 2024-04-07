@@ -10,7 +10,7 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.Representative;
 
 @Repository
-public interface RepresentativeRepository extends MongoRepository<Representative, ObjectId> {
+public interface RepresentativeRepository extends MongoRepository<Representative, String> {
 
     // public List<Representative> findByParty(String party);
 

@@ -10,7 +10,7 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.VoterStat;
 
 @Repository
-public interface VoterStatRepository extends MongoRepository<VoterStat, ObjectId> {
+public interface VoterStatRepository extends MongoRepository<VoterStat, String> {
 
     public Optional<VoterStat> findByState(State state);
 
