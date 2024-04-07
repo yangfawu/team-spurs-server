@@ -1,5 +1,8 @@
 # team-spurs-server
 
+### Connecting Codespace with Mongo
+Run `curl ipinfo.io/ip` to get the IP address of the current Codespace container. Then whitelist this IP on MongoDB's Network Access. Note that if your Codespace goes down, it may be assigned a new IP by GitHub. 
+
 ### About Packages in `cse416.teamspurs.server`
 1. `config` -  files responsible for configuring the server (ex: CORS settings)
 2. `constant` - files where enums are stored
