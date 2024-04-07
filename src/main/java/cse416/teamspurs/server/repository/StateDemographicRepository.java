@@ -10,7 +10,7 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.StateDemographic;
 
 @Repository
-public interface StateDemographicRepository extends MongoRepository<StateDemographic, ObjectId> {
+public interface StateDemographicRepository extends MongoRepository<StateDemographic, String> {
 
     public Optional<StateDemographic> findByState(State state);
 
