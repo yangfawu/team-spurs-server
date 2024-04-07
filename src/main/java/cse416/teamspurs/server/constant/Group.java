@@ -6,7 +6,6 @@ public enum Group {
     black,
     hawaiian_pacific_islander,
     hispanic_latino,
-    total_population,
     mixed,
     other,
     white;

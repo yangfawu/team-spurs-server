@@ -83,7 +83,7 @@ public class MapService {
                 var count = demo.getCount().getOrDefault(group, 0);
 
                 // Calculate the heat value and store it in properties
-                var heat_value = (count - min) / diff;
+                double heat_value = Math.max(0, (count - min)) / diff;
                 feature.getProperties().put(HEAT_PROPERTY_KEY, heat_value);
             }
         }
