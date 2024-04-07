@@ -3,7 +3,6 @@ package cse416.teamspurs.server.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,18 +29,18 @@ public class DemographicController {
         // this check is necessary because the return type is Optional
         // this check will probably never execute because the state input is an enum
         if (optionalDemo.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.notFound().build();
         }
 
         var demo = optionalDemo.get();
-        return new ResponseEntity<>(demo, HttpStatus.OK);
+        return ResponseEntity.ok(demo);
     }
 
-    @GetMapping(path = "/district/{state}")
+    @GetMapping("/district/{state}")
     public ResponseEntity<List<DistrictDemographic>> getDistrictDemographicsByState(
             @PathVariable("state") State state) {
         var res = service.getDistrictDemographicsByState(state);
-        return new ResponseEntity<>(res, HttpStatus.OK);
+        return ResponseEntity.ok(res);
     }
 
 }
