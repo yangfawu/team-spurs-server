@@ -33,7 +33,7 @@ public class MapController {
     public ResponseEntity<HeatMapDTO> getMaxPopFrom(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
-        var res = service.getHeatedAssymblyDistrictsByStateAndGroup(state, group);
+        var res = service.getHeatedAssemblyDistrictsByStateAndGroup(state, group);
         return ResponseEntity.ok(res);
     }
 

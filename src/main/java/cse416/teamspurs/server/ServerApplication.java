@@ -10,6 +10,8 @@ public class ServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);
+		System.out.println(Group.american_indian_alaska_native);
+		System.out.println(Group.black);
 	}
 
 }

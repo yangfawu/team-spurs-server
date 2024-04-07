@@ -46,7 +46,7 @@ public class MapService {
      *         specified group demographics
      */
     @Cacheable("heated-assembly-districts")
-    public HeatMapDTO getHeatedAssymblyDistrictsByStateAndGroup(State state, Group group) {
+    public HeatMapDTO getHeatedAssemblyDistrictsByStateAndGroup(State state, Group group) {
         var bounds = demoService.getPopulationBoundsByStateAndGroup(state, group);
         var min = bounds.getMin();
         var max = bounds.getMax();
