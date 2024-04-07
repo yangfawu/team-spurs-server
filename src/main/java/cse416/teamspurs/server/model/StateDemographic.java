@@ -1,25 +1,24 @@
 package cse416.teamspurs.server.model;
 
-import org.bson.types.ObjectId;
+import java.util.Map;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import cse416.teamspurs.server.constant.Group;
+import cse416.teamspurs.server.constant.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "district-demographic")
+@Document(collection = "state-demographic")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExtremeDistrictProjection extends BaseDistrict {
+public class StateDemographic {
     @Id
-    private ObjectId id;
+    private String id;
 
-    private int min;
-
-    private int max;
-
+    private Map<Group, Integer> count;
+    private State state;
 }

@@ -6,23 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.dao.RepresentativeDao;
 import cse416.teamspurs.server.model.Representative;
+import cse416.teamspurs.server.repository.RepresentativeRepository;
 
 @Service
 public class RepresentativeService {
 
     @Autowired
-    private RepresentativeDao repo;
-
-    /**
-     * Retrieves all representatives.
-     * 
-     * @return a list of representatives
-     */
-    public List<Representative> getAll() {
-        return repo.findAll();
-    }
+    private RepresentativeRepository repo;
 
     /**
      * Retrieves all representatives by party.
@@ -31,8 +22,7 @@ public class RepresentativeService {
      * @return a list of representatives in the specified party
      */
     public List<Representative> getAllByState(State state) {
-        var mongoState = state.getLabel();
-        return repo.findByState(mongoState);
+        return repo.findByState(state);
     }
 
 }

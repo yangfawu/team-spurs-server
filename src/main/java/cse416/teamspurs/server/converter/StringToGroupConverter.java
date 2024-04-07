@@ -12,21 +12,21 @@ public class StringToGroupConverter implements Converter<String, Group> {
     public Group convert(String source) {
         switch (source) {
             case "hl":
-                return Group.HISPANIC_LATINO;
+                return Group.hispanic_latino;
             case "white":
-                return Group.WHITE;
+                return Group.white;
             case "black":
-                return Group.BLACK;
+                return Group.black;
             case "aian":
-                return Group.AMERICAN_INDIAN_ALASKA_NATIVE;
+                return Group.american_indian_alaska_native;
             case "asian":
-                return Group.ASIAN;
+                return Group.asian;
             case "hpi":
-                return Group.HAWAIIAN_PACIFIC_ISLANDER;
+                return Group.hawaiian_pacific_islander;
             case "other":
-                return Group.OTHER;
+                return Group.other;
             case "mixed":
-                return Group.MIXED;
+                return Group.mixed;
             default:
                 return null;
         }

@@ -1,49 +1,95 @@
 package cse416.teamspurs.server.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.dao.NJGeoJsonDao;
-import cse416.teamspurs.server.dao.VAGeoJsonDao;
+import cse416.teamspurs.server.dto.HeatMapDTO;
+import cse416.teamspurs.server.model.DistrictDemographic;
+import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.repository.GeoJsonRepository;
 
 @Service
 public class MapService {
 
-    @Autowired
-    private VAGeoJsonDao vaRepo;
+    private final String HEAT_PROPERTY_KEY = "heat_value";
 
     @Autowired
-    private NJGeoJsonDao njRepo;
+    private GeoJsonRepository geoJsonRepo;
+
+    @Autowired
+    private DemographicService demoService;
 
     /**
-     * Retrieves the district maps in a specific state.
+     * Retrieves the GEOJSON for the state's assembly districts.
      * 
-     * @param state the state to retrieve the district maps from
-     * @return a list of district maps in the specified state
+     * @param state the state to retrieve the GeoJson for
+     * @return the GeoJson for the specified state
      */
-    private List<?> getDistrictMaps(State state) {
-        switch (state) {
-            case NJ:
-                return njRepo.findAll();
-            case VA:
-                return vaRepo.findAll();
-            default:
-                throw new IllegalStateException();
-        }
+    public List<GeoJson> getAssemblyDistrictsByState(State state) {
+        return geoJsonRepo.findByState(state);
     }
 
     /**
-     * Retrieves the district map in a specific state.
+     * Retrieves the GEOJSON for the state's assembly districts with a heat value
+     * based on a group's demographics for each district.
      * 
-     * @param state the state to retrieve the district map from
-     * @return the district map in the specified state
+     * @param state the state to retrieve the GeoJson for
+     * @param group the group to calculate the heat value for
+     * @return the GeoJson for the specified state with a heat value based on the
+     *         specified group demographics
      */
-    public Object getDistrictMap(State state) {
-        var maps = getDistrictMaps(state);
-        return maps.get(0);
+    public HeatMapDTO getHeatedAssymblyDistrictsByStateAndGroup(State state, Group group) {
+        var bounds = demoService.getPopulationBoundsByStateAndGroup(state, group);
+        var min = bounds.getMin();
+        var max = bounds.getMax();
+        var diff = (double) max - min;
+
+        // Get the demographic data for each district and store it in a map
+        var districDemos = demoService.getDistrictDemographicsByState(state);
+        var districtToDemo = new HashMap<Integer, DistrictDemographic>();
+        for (var demo : districDemos) {
+            districtToDemo.put(demo.getDistrict(), demo);
+        }
+
+        // Get the district GeoJson for the state
+        // We will add a property to each feature with the heat value
+        var features = geoJsonRepo.findByState(state);
+
+        if (min >= max) {
+            // Heat value is impossible to calculate through nornmal means
+            // Thus, we assume 0 for all districts
+            for (var feature : features) {
+                feature.getProperties().put(HEAT_PROPERTY_KEY, 0.0);
+            }
+        } else {
+            for (var feature : features) {
+                var rawDistrict = feature.getProperties().get("district");
+
+                // If the district is not an integer, set the heat value to 0
+                if (!(rawDistrict instanceof Integer)) {
+                    feature.getProperties().put(HEAT_PROPERTY_KEY, 0.0);
+                    continue;
+                }
+
+                var district = (Integer) rawDistrict;
+
+                // Use district to get the demographic data for the district
+                var demo = districtToDemo.get(district);
+                var count = demo.getCount().getOrDefault(group, 0);
+
+                // Calculate the heat value and store it in properties
+                var heat_value = (count - min) / diff;
+                feature.getProperties().put(HEAT_PROPERTY_KEY, heat_value);
+            }
+        }
+
+        var dto = new HeatMapDTO(min, max, features);
+        return dto;
     }
 
 }

@@ -1,27 +1,25 @@
 package cse416.teamspurs.server.model;
 
+import java.util.Map;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "legislators")
+@Document(collection = "district-demographic")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Representative {
+public class DistrictDemographic {
     @Id
     private String id;
 
-    private String first_name;
-    private String last_name;
+    private Map<Group, Integer> count;
     private Integer district;
-    private String party;
-    private String race;
-    private String race2;
-    private String image;
     private State state;
 }
