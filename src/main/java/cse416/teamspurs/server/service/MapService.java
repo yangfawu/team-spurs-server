@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.Group;
@@ -30,6 +31,7 @@ public class MapService {
      * @param state the state to retrieve the GeoJson for
      * @return the GeoJson for the specified state
      */
+    @Cacheable("assembly-districts")
     public List<GeoJson> getAssemblyDistrictsByState(State state) {
         return geoJsonRepo.findByState(state);
     }
@@ -43,6 +45,7 @@ public class MapService {
      * @return the GeoJson for the specified state with a heat value based on the
      *         specified group demographics
      */
+    @Cacheable("heated-assembly-districts")
     public HeatMapDTO getHeatedAssymblyDistrictsByStateAndGroup(State state, Group group) {
         var bounds = demoService.getPopulationBoundsByStateAndGroup(state, group);
         var min = bounds.getMin();
