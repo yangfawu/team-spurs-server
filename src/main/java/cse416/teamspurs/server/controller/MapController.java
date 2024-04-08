@@ -23,14 +23,14 @@ public class MapController {
     private MapService service;
 
     @GetMapping("/regular/{state}")
-    public ResponseEntity<List<GeoJson>> getReps(
+    public ResponseEntity<List<GeoJson>> getStateMap(
             @PathVariable("state") State state) {
         var res = service.getAssemblyDistrictsByState(state);
         return ResponseEntity.ok(res);
     }
 
     @GetMapping("/heat/{state}/{group}")
-    public ResponseEntity<HeatMapDTO> getMaxPopFrom(
+    public ResponseEntity<HeatMapDTO> getHeatMap(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
         var res = service.getHeatedAssemblyDistrictsByStateAndGroup(state, group);
