@@ -10,16 +10,31 @@ import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.model.DistrictGeoJson;
+import cse416.teamspurs.server.model.StateGeoJson;
 import cse416.teamspurs.server.repository.DistrictGeoJsonRepository;
+import cse416.teamspurs.server.repository.StateGeoJsonRepository;
 
 @Service
 public class MapService {
 
     @Autowired
-    private DistrictGeoJsonRepository geoJsonRepo;
+    private DistrictGeoJsonRepository districtRepo;
+
+    @Autowired
+    private StateGeoJsonRepository stateRepo;
 
     @Autowired
     private DemographicService demoService;
+
+    /**
+     * Retrieves the GEOJSON for all states.
+     * 
+     * @return the GeoJson for all states
+     */
+    @Cacheable("states")
+    public List<StateGeoJson> getAllStates() {
+        return stateRepo.findAll();
+    }
 
     /**
      * Retrieves the GEOJSON for the state's assembly districts.
@@ -29,7 +44,7 @@ public class MapService {
      */
     @Cacheable("assembly-districts")
     public List<DistrictGeoJson> getRegularDistrictMapByState(State state) {
-        return geoJsonRepo.findByState(state);
+        return districtRepo.findByState(state);
     }
 
     /**
@@ -47,7 +62,7 @@ public class MapService {
         var min = bounds.getMin();
         var max = bounds.getMax();
 
-        var features = geoJsonRepo.findByStateAndGroup(state, group);
+        var features = districtRepo.findByStateAndGroup(state, group);
 
         return new HeatMapDTO(min, max, features);
     }
