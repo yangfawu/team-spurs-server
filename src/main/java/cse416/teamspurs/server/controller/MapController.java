@@ -13,6 +13,7 @@ import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.model.DistrictGeoJson;
+import cse416.teamspurs.server.model.StateGeoJson;
 import cse416.teamspurs.server.service.MapService;
 
 @RestController
@@ -21,6 +22,12 @@ public class MapController {
 
     @Autowired
     private MapService service;
+
+    @GetMapping("/states")
+    public ResponseEntity<List<StateGeoJson>> getAllStates() {
+        var res = service.getAllStates();
+        return ResponseEntity.ok(res);
+    }
 
     @GetMapping("/regular/{state}")
     public ResponseEntity<List<DistrictGeoJson>> getStateMap(
