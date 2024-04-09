@@ -25,7 +25,7 @@ public class MapController {
     @GetMapping("/regular/{state}")
     public ResponseEntity<List<DistrictGeoJson>> getStateMap(
             @PathVariable("state") State state) {
-        var res = service.getAssemblyDistrictsByState(state);
+        var res = service.getRegularDistrictMapByState(state);
         return ResponseEntity.ok(res);
     }
 
@@ -33,7 +33,7 @@ public class MapController {
     public ResponseEntity<HeatMapDTO> getHeatMap(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
-        var res = service.getHeatedAssemblyDistrictsByStateAndGroup(state, group);
+        var res = service.getHeatDistrictMapByStateAndGroup(state, group);
         return ResponseEntity.ok(res);
     }
 
