@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dto.HeatMapDTO;
-import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.model.DistrictGeoJson;
 import cse416.teamspurs.server.service.MapService;
 
 @RestController
@@ -23,7 +23,7 @@ public class MapController {
     private MapService service;
 
     @GetMapping("/regular/{state}")
-    public ResponseEntity<List<GeoJson>> getStateMap(
+    public ResponseEntity<List<DistrictGeoJson>> getStateMap(
             @PathVariable("state") State state) {
         var res = service.getAssemblyDistrictsByState(state);
         return ResponseEntity.ok(res);
