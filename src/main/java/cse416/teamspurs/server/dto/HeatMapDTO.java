@@ -2,7 +2,7 @@ package cse416.teamspurs.server.dto;
 
 import java.util.List;
 
-import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.model.DistrictGeoJson;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,5 +11,5 @@ import lombok.Data;
 public class HeatMapDTO {
     private int min;
     private int max;
-    private List<GeoJson> features;
+    private List<DistrictGeoJson> features;
 }

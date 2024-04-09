@@ -10,11 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// TODO: rename collection to district-geojson when done
 @Document(collection = "geojson")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GeoJson {
+public class DistrictGeoJson {
     @Id
     private String id;
 
