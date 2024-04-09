@@ -1,27 +1,23 @@
 package cse416.teamspurs.server.model;
 
-import java.util.HashMap;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import cse416.teamspurs.server.constant.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "district-geojson")
+@Document(collection = "state-geojson")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
 @NoArgsConstructor
-public class DistrictGeoJson extends PropertiesLessGeoJson {
+@AllArgsConstructor
+public class StateGeoJson extends PropertiesLessGeoJson {    
     private Properties properties;
 
-    public static class Properties extends HashMap<String, Object> {
-
-        public Integer getDistrict() {
-            return (Integer) get("district");
-        }
-
+    @Data
+    public static class Properties {
+        private State state;
     }
 }
