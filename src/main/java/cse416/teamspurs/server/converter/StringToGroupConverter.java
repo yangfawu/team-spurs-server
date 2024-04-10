@@ -11,17 +11,17 @@ public class StringToGroupConverter implements Converter<String, Group> {
     @Override
     public Group convert(String source) {
         switch (source) {
-            case "hl":
+            case "hispanic_latino":
                 return Group.hispanic_latino;
             case "white":
                 return Group.white;
             case "black":
                 return Group.black;
-            case "aian":
+            case "american_indian_alaska_native":
                 return Group.american_indian_alaska_native;
             case "asian":
                 return Group.asian;
-            case "hpi":
+            case "hawaiian_pacific_islander":
                 return Group.hawaiian_pacific_islander;
             case "other":
                 return Group.other;
