@@ -1,7 +1,5 @@
 package cse416.teamspurs.server.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +9,6 @@ import cse416.teamspurs.server.model.StateDemographic;
 @Repository
 public interface StateDemographicRepository extends MongoRepository<StateDemographic, String> {
 
-    public Optional<StateDemographic> findByState(State state);
+    public StateDemographic findByState(State state);
 
 }

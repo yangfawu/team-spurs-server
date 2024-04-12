@@ -1,7 +1,6 @@
 package cse416.teamspurs.server.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class DemographicService {
      * @param state the state to retrieve the demographic information for
      * @return the demographic information for the specified state
      */
-    public Optional<StateDemographic> getStateDemographic(State state) {
+    public StateDemographic getStateDemographic(State state) {
         return stateRepo.findByState(state);
     }
 

@@ -24,16 +24,8 @@ public class DemographicController {
     @GetMapping("/overall/{state}")
     public ResponseEntity<StateDemographic> getOverallDemographicsByState(
             @PathVariable("state") State state) {
-        var optionalDemo = service.getStateDemographic(state);
-
-        // this check is necessary because the return type is Optional
-        // this check will probably never execute because the state input is an enum
-        if (optionalDemo.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var demo = optionalDemo.get();
-        return ResponseEntity.ok(demo);
+        var res = service.getStateDemographic(state);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/district/{state}")
