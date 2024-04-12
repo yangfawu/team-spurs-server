@@ -20,13 +20,7 @@ public class VoterStatController {
 
     @GetMapping("/{state}")
     public ResponseEntity<VoterStat> getStatByState(@PathVariable("state") State state) {
-        var optionalStat = service.getVoterStatByState(state);
-
-        if (optionalStat.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var res = optionalStat.get();
+        var res = service.getVoterStatByState(state);
         return ResponseEntity.ok(res);
     }
 
