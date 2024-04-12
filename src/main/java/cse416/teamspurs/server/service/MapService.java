@@ -64,6 +64,7 @@ public class MapService {
      * @param group the group to retrieve the bounds for
      * @return the population bounds for the specified state and group
      */
+    @Cacheable("legend")
     public GroupStateBound getHeatLegendByStateAndGroup(State state, Group group) {
         return boundRepo.findByStateAndGroup(state, group);
     }
