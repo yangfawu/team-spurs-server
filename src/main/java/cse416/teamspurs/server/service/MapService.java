@@ -8,23 +8,14 @@ import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.dto.HeatMapDTO;
-import cse416.teamspurs.server.model.DistrictGeoJson;
-import cse416.teamspurs.server.model.StateGeoJson;
-import cse416.teamspurs.server.repository.DistrictGeoJsonRepository;
-import cse416.teamspurs.server.repository.StateGeoJsonRepository;
+import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.repository.GeoJsonRepository;
 
 @Service
 public class MapService {
 
     @Autowired
-    private DistrictGeoJsonRepository districtRepo;
-
-    @Autowired
-    private StateGeoJsonRepository stateRepo;
-
-    @Autowired
-    private DemographicService demoService;
+    private GeoJsonRepository geoJsonRepo;
 
     /**
      * Retrieves the GEOJSON for all states.
@@ -32,8 +23,8 @@ public class MapService {
      * @return the GeoJson for all states
      */
     @Cacheable("states")
-    public List<StateGeoJson> getAllStates() {
-        return stateRepo.findAll();
+    public List<GeoJson> getAllStates() {
+        return geoJsonRepo.findAllStateGeoJsons();
     }
 
     /**
@@ -43,8 +34,8 @@ public class MapService {
      * @return the GeoJson for the specified state
      */
     @Cacheable("assembly-districts")
-    public List<DistrictGeoJson> getRegularDistrictMapByState(State state) {
-        return districtRepo.findByState(state);
+    public List<GeoJson> getRegularDistrictMapByState(State state) {
+        return geoJsonRepo.findDistrictGeoJsonsByState(state);
     }
 
     /**
@@ -57,14 +48,8 @@ public class MapService {
      *         specified group demographics
      */
     @Cacheable("heated-assembly-districts")
-    public HeatMapDTO getHeatDistrictMapByStateAndGroup(State state, Group group) {
-        var bounds = demoService.getPopulationBoundsByStateAndGroup(state, group);
-        var min = bounds.getMin();
-        var max = bounds.getMax();
-
-        var features = districtRepo.findByStateAndGroup(state, group);
-
-        return new HeatMapDTO(min, max, features);
+    public List<GeoJson> getHeatMapByStateAndGroup(State state, Group group) {
+        return geoJsonRepo.findHeatGeoJsonsByStateAndGroup(state, group);
     }
 
 }
