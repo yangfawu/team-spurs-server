@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.model.GroupStateBound;
 import cse416.teamspurs.server.repository.GeoJsonRepository;
+import cse416.teamspurs.server.repository.GroupStateBoundRepository;
 
 @Service
 public class MapService {
 
     @Autowired
     private GeoJsonRepository geoJsonRepo;
+
+    @Autowired
+    private GroupStateBoundRepository boundRepo;
 
     /**
      * Retrieves the GEOJSON for all states.
@@ -50,6 +55,17 @@ public class MapService {
     @Cacheable("heated-assembly-districts")
     public List<GeoJson> getHeatMapByStateAndGroup(State state, Group group) {
         return geoJsonRepo.findHeatGeoJsonsByStateAndGroup(state, group);
+    }
+
+    /**
+     * Retrieves the population bounds for a state and group.
+     * 
+     * @param state the state to retrieve the bounds for
+     * @param group the group to retrieve the bounds for
+     * @return the population bounds for the specified state and group
+     */
+    public GroupStateBound getHeatLegendByStateAndGroup(State state, Group group) {
+        return boundRepo.findByStateAndGroup(state, group);
     }
 
 }

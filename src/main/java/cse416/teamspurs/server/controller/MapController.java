@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJson;
+import cse416.teamspurs.server.model.GroupStateBound;
 import cse416.teamspurs.server.service.MapService;
 
 @RestController
@@ -39,6 +40,14 @@ public class MapController {
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
         var res = service.getHeatMapByStateAndGroup(state, group);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/heat/legend/{state}/{group}")
+    public ResponseEntity<GroupStateBound> getHeatMapLegend(
+            @PathVariable("state") State state,
+            @PathVariable("group") Group group) {
+        var res = service.getHeatLegendByStateAndGroup(state, group);
         return ResponseEntity.ok(res);
     }
 
