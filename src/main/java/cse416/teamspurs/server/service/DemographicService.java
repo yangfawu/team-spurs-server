@@ -26,6 +26,7 @@ public class DemographicService {
      * @param state the state to retrieve the demographic information for
      * @return the demographic information for the specified state
      */
+    @Cacheable("state-demo")
     public StateDemographic getStateDemographic(State state) {
         return stateRepo.findByState(state);
     }
@@ -36,6 +37,7 @@ public class DemographicService {
      * @param state the state to retrieve the demographic information for
      * @return the demographic information for each district in the specified state
      */
+    @Cacheable("district-demo")
     public List<DistrictDemographic> getDistrictDemographicsByState(State state) {
         return districtRepo.findByState(state);
     }

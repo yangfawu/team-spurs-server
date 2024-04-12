@@ -21,6 +21,7 @@ public class RepresentativeService {
      * @param party the party to retrieve representatives from
      * @return a list of representatives in the specified party
      */
+    @Cacheable("reps")
     public List<Representative> getAllByState(State state) {
         return repo.findByState(state);
     }

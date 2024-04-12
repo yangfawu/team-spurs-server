@@ -19,6 +19,7 @@ public class VoterStatService {
      * @param state the state to get the voter statistics for
      * @return the voter statistics for the specified state
      */
+    @Cacheable("voters")
     public VoterStat getVoterStatByState(State state) {
         return repo.findByState(state);
     }
