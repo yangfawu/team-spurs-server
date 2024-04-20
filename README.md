@@ -15,6 +15,9 @@ Run `curl ipinfo.io/ip` to get the IP address of the current Codespace container
 9. `repository` - files where **simple** Mongo operations are defined
 10. `service` - files where service files are stored
 
+### About Caching
+We have caching enabled for a lot of service methods because the data we are returing is never changing. By default, we have confugred cache to be stored on the heap. This is fine, but can be a problem when the machine does not have decent RAM to store caches for things like our GeoJSON responses. For this reason, you can use the `.env` file to control whether or not caching should be used in your environment. Change the value of `CACHE_TYPE` to `none` for no caching. Change it to `simple` for caching.
+
 ### Terminology
 1. **DAO** - Data Access Object
     > we use them to define complex or custom Mongo operations that are not supported by MongoRepository out of the box
