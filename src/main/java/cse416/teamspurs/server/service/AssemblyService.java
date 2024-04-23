@@ -3,6 +3,7 @@ package cse416.teamspurs.server.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.State;
@@ -25,18 +26,17 @@ public class AssemblyService {
     @Autowired
     private RepresentativeRepository repRepo;
 
-    public List<GeoJsonFeature> getAllStates() {
-        return featureRepo.findAllStateFeatures();
-    }
-
+    @Cacheable("assembly-plan")
     public List<GeoJsonFeature> getAssemblyPlanByState(State state) {
         return featureRepo.findDistrictFeaturesByState(state);
     }
 
+    @Cacheable("state-demographic")
     public StateDemographic getStateDemographic(State state) {
         return demoRepo.findByState(state);
     }
 
+    @Cacheable("state-representatives")
     public List<Representative> getRepresentativesByState(State state) {
         return repRepo.findByState(state);
     }
