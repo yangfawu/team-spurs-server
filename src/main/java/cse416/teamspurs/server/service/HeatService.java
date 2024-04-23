@@ -1,6 +1,7 @@
 package cse416.teamspurs.server.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.Group;
@@ -19,6 +20,7 @@ public class HeatService {
     @Autowired
     private HeatMapLegendRepository legendRepo;
 
+    @Cacheable("heat-map")
     public HeatMapDTO getHeatMap(State state, HeatLevel level, Group group) {
         var legend = legendRepo.findByStateAndLevelAndGroup(state, level, group);
         var features = featureRepo.findByStateAndLevel(state, level);
