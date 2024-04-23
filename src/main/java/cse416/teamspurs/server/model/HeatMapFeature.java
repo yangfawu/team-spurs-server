@@ -6,26 +6,24 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import cse416.teamspurs.server.constant.Group;
-import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.constant.HeatLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import cse416.teamspurs.server.constant.State;
+import lombok.Getter;
 
 @Document(collection = "heat-map-features")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class HeatMapFeature
-{
+@Getter
+public class HeatMapFeature {
     @Id
     private String id;
 
     private State state;
     private HeatLevel level;
-    private Map<Group, Integer> bins;
-    private String title;
-    private Map<Group, Integer> demographic;
-   
 
+    private String type;
+    private Object geometry;
+    private Map<String, Object> properties;
+
+    private String title;
+    private Map<Group, Integer> bins;
+    private Map<Group, Integer> demographic;
 }

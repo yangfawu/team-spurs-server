@@ -11,11 +11,6 @@ import cse416.teamspurs.server.model.Representative;
 @Repository
 public interface RepresentativeRepository extends MongoRepository<Representative, String> {
 
-    // public List<Representative> findByParty(String party);
-
-    // @Query("{ $or: [{'race': ?0}, {'race2': ?0} ]}")
-    // public List<Representative> findByRace(String race);
-
     public List<Representative> findByState(State state);
 
 }

@@ -7,14 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @Document(collection = "state-demographic")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class StateDemographic {
     @Id
     private String id;
