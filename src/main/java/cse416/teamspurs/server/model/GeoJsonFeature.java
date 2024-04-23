@@ -7,20 +7,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import cse416.teamspurs.server.constant.GeoLevel;
 import cse416.teamspurs.server.constant.State;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @Document(collection = "geojson")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class GeoJson {
+@Getter
+public class GeoJsonFeature {
     @Id
     private String id;
 
     private GeoLevel level;
     private State state;
+
     private String type;
     private Object geometry;
     private Map<String, Object> properties;

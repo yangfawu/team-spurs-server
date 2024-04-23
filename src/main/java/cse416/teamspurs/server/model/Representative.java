@@ -8,14 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.Party;
 import cse416.teamspurs.server.constant.State;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 @Document(collection = "legislators")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class Representative {
     @Id
     private String id;
