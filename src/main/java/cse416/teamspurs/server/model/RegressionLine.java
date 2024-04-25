@@ -20,5 +20,5 @@ public class RegressionLine {
     private Group group;
     private Party party;
 
-    private List<Integer> coefficients;
+    private List<Double> coefficients;
 }

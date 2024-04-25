@@ -21,8 +21,8 @@ public class PrecinctPoint {
     private Integer total_population;
     private Integer group_population;
 
-    private Integer percent_group;
-    private Integer percent_democrat;
-    private Integer percent_republican;
+    private Double percent_group;
+    private Double percent_democrat;
+    private Double percent_republican;
 
 }

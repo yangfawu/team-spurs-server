@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Document("seawulf-boxes")
 @Getter
-public class Box {
+public class EnsembleBox {
     @Id
     private String id;
 
@@ -18,12 +18,12 @@ public class Box {
     private Group group;
 
     private Integer district;    
-    private Integer actual;
+    private Double actual;
 
-    private Integer max;
-    private Integer median;
-    private Integer min;
-    private Integer q1;
-    private Integer q3;
+    private Double max;
+    private Double median;
+    private Double min;
+    private Double q1;
+    private Double q3;
 
 }
