@@ -7,8 +7,10 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.model.PrecinctPoint;
 
+import java.util.List;
+
 @Repository
 public interface PrecinctPointRespository extends MongoRepository<PrecinctPoint, String> {
-    PrecinctPoint findByStateAndGroup(State state, Group group);
+    List<PrecinctPoint> findByStateAndGroup(State state, Group group);
 
 }
