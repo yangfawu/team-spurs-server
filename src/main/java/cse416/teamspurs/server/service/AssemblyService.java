@@ -10,9 +10,11 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
+import cse416.teamspurs.server.model.StateVoterDistribution;
 import cse416.teamspurs.server.repository.GeoJsonFeatureRepository;
 import cse416.teamspurs.server.repository.RepresentativeRepository;
 import cse416.teamspurs.server.repository.StateDemographicRepository;
+import cse416.teamspurs.server.repository.StateVoterDistributionRepository;
 
 @Service
 public class AssemblyService {
@@ -25,6 +27,9 @@ public class AssemblyService {
 
     @Autowired
     private RepresentativeRepository repRepo;
+
+    @Autowired
+    private StateVoterDistributionRepository disRepo;
 
     @Cacheable("assembly-plan")
     public List<GeoJsonFeature> getAssemblyPlanByState(State state) {
@@ -39,6 +44,11 @@ public class AssemblyService {
     @Cacheable("state-representatives")
     public List<Representative> getRepresentativesByState(State state) {
         return repRepo.findByState(state);
+    }
+
+    @Cacheable("state-voter-distribution")
+    public StateVoterDistribution getStateVoterDistribution(State state) {
+        return disRepo.findByState(state);
     }
 
 }

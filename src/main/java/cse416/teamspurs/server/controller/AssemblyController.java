@@ -13,6 +13,7 @@ import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
+import cse416.teamspurs.server.model.StateVoterDistribution;
 import cse416.teamspurs.server.service.AssemblyService;
 
 @RestController
@@ -40,6 +41,13 @@ public class AssemblyController {
     public ResponseEntity<List<Representative>> getStateRepresentatives(
             @PathVariable("state") State state) {
         var res = service.getRepresentativesByState(state);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/{state}/voter")
+    public ResponseEntity<StateVoterDistribution> getStateVoterDistribution(
+            @PathVariable("state") State state) {
+        var res = service.getStateVoterDistribution(state);
         return ResponseEntity.ok(res);
     }
 
