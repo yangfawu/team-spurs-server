@@ -23,4 +23,5 @@ public class Representative {
     private List<Group> race;
     private String image;
     private State state;
+    private Double vote_margin;
 }
