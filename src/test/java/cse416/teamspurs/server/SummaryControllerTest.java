@@ -11,12 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.controller.SummaryController;
 import cse416.teamspurs.server.model.GeoJsonFeature;
-import cse416.teamspurs.server.service.AssemblyService;
+import cse416.teamspurs.server.service.SummaryService;
 
 @WebMvcTest(SummaryController.class)
 public class SummaryControllerTest {
     @MockBean
-    AssemblyService service;
+    SummaryService service;
 
     @Test
     void doesEachNJGeoJsonFeatureHaveDistrict() {

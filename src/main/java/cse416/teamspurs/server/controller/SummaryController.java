@@ -14,14 +14,14 @@ import cse416.teamspurs.server.model.GeoJsonFeature;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
 import cse416.teamspurs.server.model.StateVoterDistribution;
-import cse416.teamspurs.server.service.AssemblyService;
+import cse416.teamspurs.server.service.SummaryService;
 
 @RestController
 @RequestMapping("/api/summary")
 public class SummaryController {
 
     @Autowired
-    private AssemblyService service;
+    private SummaryService service;
 
     @GetMapping("/{state}/demographic")
     public ResponseEntity<StateDemographic> getStateDemographic(

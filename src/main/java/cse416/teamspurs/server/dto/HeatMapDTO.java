@@ -10,8 +10,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class HeatMapDTO {
-
     private List<HeatMapFeature> features;
     private HeatMapLegend legend;
-
 }

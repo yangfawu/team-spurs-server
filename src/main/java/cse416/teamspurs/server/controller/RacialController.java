@@ -10,27 +10,24 @@ import org.springframework.web.bind.annotation.RestController;
 import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.HeatLevel;
 import cse416.teamspurs.server.constant.State;
+import cse416.teamspurs.server.dto.BoxAndWhiskerDTO;
 import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.dto.PrecinctAnalysisDTO;
-import cse416.teamspurs.server.service.HeatService;
-import cse416.teamspurs.server.service.PrecinctService;
+import cse416.teamspurs.server.service.RacialService;
 
 @RestController
 @RequestMapping("/api/racial")
 public class RacialController {
 
     @Autowired
-    private PrecinctService precinctService;
-
-    @Autowired
-    private HeatService heatService;
+    private RacialService service;
 
     @GetMapping("/heat/{state}/{level}/{group}")
     public ResponseEntity<HeatMapDTO> getHeapMap(
             @PathVariable("state") State state,
             @PathVariable("level") HeatLevel level,
             @PathVariable("group") Group group) {
-        var res = heatService.getHeatMap(state, level, group);
+        var res = service.getHeatMap(state, level, group);
         return ResponseEntity.ok(res);
     }
 
@@ -38,7 +35,15 @@ public class RacialController {
     public ResponseEntity<PrecinctAnalysisDTO> getPrecinctAnalysis(
             @PathVariable("state") State state,
             @PathVariable("group") Group group) {
-        var res = precinctService.getPrecinctAnalysis(state, group);
+        var res = service.getPrecinctAnalysis(state, group);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/box/{state}/{group}")
+    public ResponseEntity<BoxAndWhiskerDTO> getBoxAndWhiskerAnalysis(
+            @PathVariable("state") State state,
+            @PathVariable("group") Group group) {
+        var res = service.getBoxAndWhiskerAnalysis(state, group);
         return ResponseEntity.ok(res);
     }
 

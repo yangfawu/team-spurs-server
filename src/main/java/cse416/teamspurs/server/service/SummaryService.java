@@ -17,7 +17,7 @@ import cse416.teamspurs.server.repository.StateDemographicRepository;
 import cse416.teamspurs.server.repository.StateVoterDistributionRepository;
 
 @Service
-public class AssemblyService {
+public class SummaryService {
 
     @Autowired
     private GeoJsonFeatureRepository featureRepo;

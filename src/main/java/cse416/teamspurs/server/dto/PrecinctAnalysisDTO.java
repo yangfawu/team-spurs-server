@@ -10,8 +10,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class PrecinctAnalysisDTO {
-
     private List<PrecinctPoint> rows;
     private List<RegressionLine> lines;
-
 }
