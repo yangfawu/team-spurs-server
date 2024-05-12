@@ -17,8 +17,8 @@ import cse416.teamspurs.server.model.StateVoterDistribution;
 import cse416.teamspurs.server.service.AssemblyService;
 
 @RestController
-@RequestMapping("/api/assembly")
-public class AssemblyController {
+@RequestMapping("/api/summary")
+public class SummaryController {
 
     @Autowired
     private AssemblyService service;

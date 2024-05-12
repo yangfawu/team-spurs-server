@@ -9,12 +9,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import cse416.teamspurs.server.constant.State;
-import cse416.teamspurs.server.controller.AssemblyController;
+import cse416.teamspurs.server.controller.SummaryController;
 import cse416.teamspurs.server.model.GeoJsonFeature;
 import cse416.teamspurs.server.service.AssemblyService;
 
-@WebMvcTest(AssemblyController.class)
-public class AssemblyControllerTest {
+@WebMvcTest(SummaryController.class)
+public class SummaryControllerTest {
     @MockBean
     AssemblyService service;
 

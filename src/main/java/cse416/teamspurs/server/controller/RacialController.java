@@ -11,21 +11,34 @@ import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.HeatLevel;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.dto.HeatMapDTO;
+import cse416.teamspurs.server.dto.PrecinctAnalysisDTO;
 import cse416.teamspurs.server.service.HeatService;
+import cse416.teamspurs.server.service.PrecinctService;
 
 @RestController
-@RequestMapping("/api/heat")
-public class HeatController {
+@RequestMapping("/api/racial")
+public class RacialController {
 
     @Autowired
-    private HeatService service;
+    private PrecinctService precinctService;
 
-    @GetMapping("/{state}/{level}/{group}")
+    @Autowired
+    private HeatService heatService;
+
+    @GetMapping("/heat/{state}/{level}/{group}")
     public ResponseEntity<HeatMapDTO> getHeapMap(
             @PathVariable("state") State state,
             @PathVariable("level") HeatLevel level,
             @PathVariable("group") Group group) {
-        var res = service.getHeatMap(state, level, group);
+        var res = heatService.getHeatMap(state, level, group);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/precinct/{state}/{group}")
+    public ResponseEntity<PrecinctAnalysisDTO> getPrecinctAnalysis(
+            @PathVariable("state") State state,
+            @PathVariable("group") Group group) {
+        var res = precinctService.getPrecinctAnalysis(state, group);
         return ResponseEntity.ok(res);
     }
 
