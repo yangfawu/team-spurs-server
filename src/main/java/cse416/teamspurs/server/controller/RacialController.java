@@ -14,6 +14,9 @@ import cse416.teamspurs.server.dto.BoxAndWhiskerDTO;
 import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.dto.PrecinctAnalysisDTO;
 import cse416.teamspurs.server.service.RacialService;
+import cse416.teamspurs.server.model.EcologicalInferenceLine;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/racial")
@@ -45,6 +48,14 @@ public class RacialController {
             @PathVariable("group") Group group) {
         var res = service.getBoxAndWhiskerAnalysis(state, group);
         return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/ei/{state}")
+    public ResponseEntity<List<EcologicalInferenceLine>> getEcologicalInferenceLine(
+        @PathVariable("state") State state)
+    {
+        var res = service.getEcoInferenceLines(state);
+        return ResponseEntity.ok(res); 
     }
 
 }

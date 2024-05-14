@@ -16,11 +16,13 @@ import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.dto.PrecinctAnalysisDTO;
 import cse416.teamspurs.server.model.DistrictDemographic;
 import cse416.teamspurs.server.repository.DistrictDemographicRepository;
+import cse416.teamspurs.server.repository.EcologicalInferenceLineRepository;
 import cse416.teamspurs.server.repository.EnsembleBoxAndWhiskerRepository;
 import cse416.teamspurs.server.repository.HeatMapFeatureRepository;
 import cse416.teamspurs.server.repository.HeatMapLegendRepository;
 import cse416.teamspurs.server.repository.PrecinctPointRespository;
 import cse416.teamspurs.server.repository.RegressionLineRespository;
+import cse416.teamspurs.server.model.EcologicalInferenceLine;
 
 @Service
 public class RacialService {
@@ -42,6 +44,9 @@ public class RacialService {
 
     @Autowired
     private EnsembleBoxAndWhiskerRepository boxAndWhiskerRepo;
+
+    @Autowired
+    private EcologicalInferenceLineRepository ecoInferenceLineRepo;
 
     @Cacheable("heat-map")
     public HeatMapDTO getHeatMap(State state, HeatLevel level, Group group) {
@@ -87,4 +92,8 @@ public class RacialService {
         return dto;
     }
 
+    @Cacheable("eco-lines")
+    public List<EcologicalInferenceLine> getEcoInferenceLines(State state){
+        return ecoInferenceLineRepo.findByState(state);
+    }
 }
