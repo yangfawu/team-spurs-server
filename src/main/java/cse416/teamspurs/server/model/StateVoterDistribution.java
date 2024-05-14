@@ -16,5 +16,5 @@ public class StateVoterDistribution {
     private String id;
 
     private State state;
-    private Map<Party, Integer> breakdown;
+    private Map<Party, Double> breakdown;
 }
