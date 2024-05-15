@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface OpportunityDistrictInfoRepository extends MongoRepository<OpportunityDistrictInfo, String> {
-    public List<OpportunityDistrictInfo> findByState(State state);
+    public List<OpportunityDistrictInfo> findByStateAndThreshold(State state, Integer threshold);
 
 }
