@@ -53,7 +53,7 @@ public class SummaryController {
         return ResponseEntity.ok(res);
     }
 
-    @GetMapping("opportunity-districts/{state}/{threshold}")
+    @GetMapping("/{state}/opportunity/{threshold}")
     public ResponseEntity<List<OpportunityDistrictInfo>> getOpportunityDistricts(
         @PathVariable("state") State state,
         @PathVariable("threshold") Integer threshold) {
