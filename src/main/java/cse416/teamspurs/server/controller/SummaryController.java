@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.OpportunityDistrictDistributionBar;
 import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
@@ -55,16 +57,25 @@ public class SummaryController {
 
     @GetMapping("/{state}/opportunity/{threshold}")
     public ResponseEntity<List<OpportunityDistrictInfo>> getOpportunityDistricts(
-        @PathVariable("state") State state,
-        @PathVariable("threshold") Integer threshold) {
+            @PathVariable("state") State state,
+            @PathVariable("threshold") Integer threshold) {
         var res = service.getOpportunityDistrictInfos(state, threshold);
-        return ResponseEntity.ok(res);  
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/{state}/redistricting")
     public ResponseEntity<RedistrictingInfo> getStateRedistrictingInfo(
             @PathVariable("state") State state) {
         var res = service.getStateRedistrictingInfo(state);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/{state}/od-distribution/{group}/{threshold}")
+    public ResponseEntity<List<OpportunityDistrictDistributionBar>> getOpportunityDistrictDistribution(
+            @PathVariable("state") State state,
+            @PathVariable("group") Group group,
+            @PathVariable("threshold") String threshold) {
+        var res = service.getEnsembleOpportunityDistrictDistribution(state, group, threshold);
         return ResponseEntity.ok(res);
     }
 

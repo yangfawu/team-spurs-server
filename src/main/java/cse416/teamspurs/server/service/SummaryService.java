@@ -6,20 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import cse416.teamspurs.server.constant.Group;
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.OpportunityDistrictDistributionBar;
 import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
 import cse416.teamspurs.server.model.StateVoterDistribution;
-
 import cse416.teamspurs.server.repository.GeoJsonFeatureRepository;
+import cse416.teamspurs.server.repository.OpportunityDistrictDistributionBarRepository;
+import cse416.teamspurs.server.repository.OpportunityDistrictInfoRepository;
 import cse416.teamspurs.server.repository.RedistrictingInfoRepository;
 import cse416.teamspurs.server.repository.RepresentativeRepository;
 import cse416.teamspurs.server.repository.StateDemographicRepository;
 import cse416.teamspurs.server.repository.StateVoterDistributionRepository;
-import cse416.teamspurs.server.repository.OpportunityDistrictInfoRepository;
 
 @Service
 public class SummaryService {
@@ -38,9 +40,12 @@ public class SummaryService {
 
     @Autowired
     private OpportunityDistrictInfoRepository opportunityDistrictInfoRepo;
-    
+
     @Autowired
     private RedistrictingInfoRepository redRepo;
+
+    @Autowired
+    private OpportunityDistrictDistributionBarRepository odBarRepo;
 
     @Cacheable("assembly-plan")
     public List<GeoJsonFeature> getAssemblyPlanByState(State state) {
@@ -66,10 +71,16 @@ public class SummaryService {
     public List<OpportunityDistrictInfo> getOpportunityDistrictInfos(State state, Integer threshold) {
         return opportunityDistrictInfoRepo.findByStateAndThreshold(state, threshold);
     }
-  
+
     @Cacheable("state-redistricting-info")
     public RedistrictingInfo getStateRedistrictingInfo(State state) {
         return redRepo.findByState(state);
+    }
+
+    @Cacheable("ensemble-opportunity-district-distribution")
+    public List<OpportunityDistrictDistributionBar> getEnsembleOpportunityDistrictDistribution(State state, Group group,
+            String threshold) {
+        return odBarRepo.findByStateAndGroupAndThreshold(state, group, threshold);
     }
 
 }
