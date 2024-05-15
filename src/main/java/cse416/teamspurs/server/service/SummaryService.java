@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
 import cse416.teamspurs.server.model.StateVoterDistribution;
 import cse416.teamspurs.server.repository.GeoJsonFeatureRepository;
+import cse416.teamspurs.server.repository.RedistrictingInfoRepository;
 import cse416.teamspurs.server.repository.RepresentativeRepository;
 import cse416.teamspurs.server.repository.StateDemographicRepository;
 import cse416.teamspurs.server.repository.StateVoterDistributionRepository;
@@ -31,6 +33,9 @@ public class SummaryService {
     @Autowired
     private StateVoterDistributionRepository disRepo;
 
+    @Autowired
+    private RedistrictingInfoRepository redRepo;
+
     @Cacheable("assembly-plan")
     public List<GeoJsonFeature> getAssemblyPlanByState(State state) {
         return featureRepo.findDistrictFeaturesByState(state);
@@ -49,6 +54,11 @@ public class SummaryService {
     @Cacheable("state-voter-distribution")
     public StateVoterDistribution getStateVoterDistribution(State state) {
         return disRepo.findByState(state);
+    }
+
+    @Cacheable("state-redistricting-info")
+    public RedistrictingInfo getStateRedistrictingInfo(State state) {
+        return redRepo.findByState(state);
     }
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
 import cse416.teamspurs.server.model.StateVoterDistribution;
@@ -48,6 +49,13 @@ public class SummaryController {
     public ResponseEntity<StateVoterDistribution> getStateVoterDistribution(
             @PathVariable("state") State state) {
         var res = service.getStateVoterDistribution(state);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/{state}/redistricting")
+    public ResponseEntity<RedistrictingInfo> getStateRedistrictingInfo(
+            @PathVariable("state") State state) {
+        var res = service.getStateRedistrictingInfo(state);
         return ResponseEntity.ok(res);
     }
 
