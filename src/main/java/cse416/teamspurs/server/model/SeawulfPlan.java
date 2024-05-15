@@ -1,6 +1,6 @@
 package cse416.teamspurs.server.model;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,17 +8,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import cse416.teamspurs.server.constant.State;
 import lombok.Getter;
 
-@Document(collection = "seawulf-features")
+@Document(collection = "seawulf-plans")
 @Getter
-public class SeawulfFeature {
+public class SeawulfPlan {
     @Id
     private String id;
 
-    private String type;
-    private Object geometry;
-    private Map<String, Object> properties;
-
     private State state;
     private Integer plan;
-    private Integer district;
+    private List<String> comments;
 }
