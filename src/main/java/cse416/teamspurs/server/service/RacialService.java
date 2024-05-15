@@ -24,6 +24,7 @@ import cse416.teamspurs.server.repository.PrecinctPointRespository;
 import cse416.teamspurs.server.repository.RegressionLineRespository;
 import cse416.teamspurs.server.model.EcologicalInferenceLine;
 
+
 @Service
 public class RacialService {
 
@@ -96,4 +97,5 @@ public class RacialService {
     public List<EcologicalInferenceLine> getEcoInferenceLines(State state){
         return ecoInferenceLineRepo.findByState(state);
     }
+
 }

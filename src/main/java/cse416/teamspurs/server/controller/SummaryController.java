@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
@@ -50,6 +51,14 @@ public class SummaryController {
             @PathVariable("state") State state) {
         var res = service.getStateVoterDistribution(state);
         return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("opportunity-districts/{state}/{threshold}")
+    public ResponseEntity<List<OpportunityDistrictInfo>> getOpportunityDistricts(
+        @PathVariable("state") State state,
+        @PathVariable("threshold") Integer threshold) {
+        var res = service.getOpportunityDistrictInfos(state, threshold);
+        return ResponseEntity.ok(res);  
     }
 
     @GetMapping("/{state}/redistricting")

@@ -8,15 +8,18 @@ import org.springframework.stereotype.Service;
 
 import cse416.teamspurs.server.constant.State;
 import cse416.teamspurs.server.model.GeoJsonFeature;
+import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 import cse416.teamspurs.server.model.RedistrictingInfo;
 import cse416.teamspurs.server.model.Representative;
 import cse416.teamspurs.server.model.StateDemographic;
 import cse416.teamspurs.server.model.StateVoterDistribution;
+
 import cse416.teamspurs.server.repository.GeoJsonFeatureRepository;
 import cse416.teamspurs.server.repository.RedistrictingInfoRepository;
 import cse416.teamspurs.server.repository.RepresentativeRepository;
 import cse416.teamspurs.server.repository.StateDemographicRepository;
 import cse416.teamspurs.server.repository.StateVoterDistributionRepository;
+import cse416.teamspurs.server.repository.OpportunityDistrictInfoRepository;
 
 @Service
 public class SummaryService {
@@ -33,6 +36,9 @@ public class SummaryService {
     @Autowired
     private StateVoterDistributionRepository disRepo;
 
+    @Autowired
+    private OpportunityDistrictInfoRepository opportunityDistrictInfoRepo;
+    
     @Autowired
     private RedistrictingInfoRepository redRepo;
 
@@ -56,6 +62,11 @@ public class SummaryService {
         return disRepo.findByState(state);
     }
 
+    @Cacheable("opportunity-districts")
+    public List<OpportunityDistrictInfo> getOpportunityDistrictInfos(State state, Integer threshold) {
+        return opportunityDistrictInfoRepo.findByStateAndThreshold(state, threshold);
+    }
+  
     @Cacheable("state-redistricting-info")
     public RedistrictingInfo getStateRedistrictingInfo(State state) {
         return redRepo.findByState(state);
