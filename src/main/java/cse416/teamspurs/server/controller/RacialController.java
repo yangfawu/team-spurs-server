@@ -15,6 +15,7 @@ import cse416.teamspurs.server.dto.HeatMapDTO;
 import cse416.teamspurs.server.dto.PrecinctAnalysisDTO;
 import cse416.teamspurs.server.service.RacialService;
 import cse416.teamspurs.server.model.EcologicalInferenceLine;
+import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 
 import java.util.List;
 
@@ -56,6 +57,14 @@ public class RacialController {
     {
         var res = service.getEcoInferenceLines(state);
         return ResponseEntity.ok(res); 
+    }
+
+    @GetMapping("opportunity-districts/{state}")
+    public ResponseEntity<List<OpportunityDistrictInfo>> getOpportunityDistricts(
+        @PathVariable("state") State state)
+    {
+        var res = service.getOpportunityDistrictInfos(state);
+        return ResponseEntity.ok(res);  
     }
 
 }

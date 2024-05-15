@@ -20,9 +20,13 @@ import cse416.teamspurs.server.repository.EcologicalInferenceLineRepository;
 import cse416.teamspurs.server.repository.EnsembleBoxAndWhiskerRepository;
 import cse416.teamspurs.server.repository.HeatMapFeatureRepository;
 import cse416.teamspurs.server.repository.HeatMapLegendRepository;
+import cse416.teamspurs.server.repository.OpportunityDistrictInfoRepository;
 import cse416.teamspurs.server.repository.PrecinctPointRespository;
 import cse416.teamspurs.server.repository.RegressionLineRespository;
 import cse416.teamspurs.server.model.EcologicalInferenceLine;
+import cse416.teamspurs.server.model.OpportunityDistrictInfo;
+
+import java.util.*;
 
 @Service
 public class RacialService {
@@ -47,6 +51,9 @@ public class RacialService {
 
     @Autowired
     private EcologicalInferenceLineRepository ecoInferenceLineRepo;
+
+    @Autowired
+    private OpportunityDistrictInfoRepository opportunityDistrictInfoRepo;
 
     @Cacheable("heat-map")
     public HeatMapDTO getHeatMap(State state, HeatLevel level, Group group) {
@@ -95,5 +102,11 @@ public class RacialService {
     @Cacheable("eco-lines")
     public List<EcologicalInferenceLine> getEcoInferenceLines(State state){
         return ecoInferenceLineRepo.findByState(state);
+    }
+
+    @Cacheable("opportunity-districts")
+    public List<OpportunityDistrictInfo> getOpportunityDistrictInfos(State state)
+    {
+        return opportunityDistrictInfoRepo.findByState(state);
     }
 }
