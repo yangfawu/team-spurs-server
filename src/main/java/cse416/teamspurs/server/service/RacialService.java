@@ -26,8 +26,6 @@ import cse416.teamspurs.server.repository.RegressionLineRespository;
 import cse416.teamspurs.server.model.EcologicalInferenceLine;
 import cse416.teamspurs.server.model.OpportunityDistrictInfo;
 
-import java.util.*;
-
 @Service
 public class RacialService {
 
